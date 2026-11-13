@@ -1,0 +1,17 @@
+{
+  "name": "缝隙 100 天 · 写作台",
+  "short_name": "缝隙写作台",
+  "description": "不改动生活，只改动生活里的缝隙 · 小红书选题、排期、文案与发布自检",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF8F3",
+  "theme_color": "#FAF8F3",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
