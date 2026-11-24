@@ -37,6 +37,7 @@ section.on{display:block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
 .card.warm{background:var(--warm-l);border-color:#F0E2D2}
 h2{font-size:17px;font-weight:600;margin:0 0 4px}
+h2 .pill{margin-left:8px;vertical-align:middle}
 .hint{font-size:12.5px;color:var(--ink3);margin:0 0 14px;line-height:1.6}
 .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
 .grow{flex:1;min-width:0}
@@ -54,8 +55,12 @@ label.lbl .pill{margin-left:auto}
 .field{margin-bottom:18px}
 .pill{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--green-l);color:var(--green-d);font-weight:500;white-space:nowrap}
 .pill.gray{background:#F2F1EC;color:var(--ink3)}
-.list-item{border:1px solid var(--line);border-radius:var(--rs);padding:12px 13px;margin-bottom:8px;background:var(--card)}
-.li-title{flex:1;min-width:180px;font-size:14px;line-height:1.55}
+.pill.warm{background:var(--warm-l);color:var(--warm)}
+.list-item{border:1px solid var(--line);border-radius:var(--rs);padding:12px 13px;margin-bottom:8px;background:var(--card);cursor:pointer;transition:.15s}
+.list-item:hover{border-color:var(--line2);background:#FDFCFA}
+.list-item.active{border-color:var(--green);background:var(--green-l)}
+.li-title{flex:1;min-width:180px;font-size:14px;line-height:1.55;font-weight:500}
+.li-meta{font-size:11.5px;color:var(--ink3);margin-top:4px;line-height:1.6}
 .li-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
 .counter{font-size:12px;color:var(--ink3);margin-top:7px}
 .counter b{color:var(--warm);font-weight:600}
@@ -91,20 +96,42 @@ label.lbl .pill{margin-left:auto}
 
 <script>
 "use strict";
-const KEY = 'xhs-writing-desk-v3';
+const KEY='xhs-writing-desk-v4';
 const $ = s => document.querySelector(s);
-const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nowId = () => 'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const count = t => (t||'').replace(/\s/g,'').length;
 
-/* 清掉旧版本数据与存储键 */
-try{ localStorage.removeItem('xhs-gap-studio-v1'); }catch(e){}
-
-const DEFAULT = () => ({ topics:[], editor:{ref:'',title:'',draft:'',body:''} });
+const DEFAULT = () => ({ topics:[], articles:[], activeId:'' });
 let S = DEFAULT();
+
+/* 迁移：把 v3 的单篇 editor 变成第一篇文章；清掉更早的键 */
 try{
-  const raw = localStorage.getItem(KEY);
-  if(raw){ const p=JSON.parse(raw); S=Object.assign(DEFAULT(),p); S.editor=Object.assign({ref:'',title:'',draft:'',body:''},p.editor||{}); }
+  const raw=localStorage.getItem(KEY);
+  if(raw){
+    const p=JSON.parse(raw);
+    S=Object.assign(DEFAULT(),p);
+    S.topics=p.topics||[];
+    S.articles=p.articles||[];
+    S.activeId=p.activeId||'';
+  }else{
+    const old=localStorage.getItem('xhs-writing-desk-v3');
+    if(old){
+      const p=JSON.parse(old);
+      S.topics=p.topics||[];
+      if(p.editor && (p.editor.title||p.editor.draft||p.editor.body)){
+        S.articles=[{id:nowId(),title:p.editor.title||'',draft:p.editor.draft||'',body:p.editor.body||'',status:'draft',createdAt:Date.now(),updatedAt:Date.now(),topic:p.editor.ref||''}];
+        S.activeId=S.articles[0].id;
+      }
+    }
+  }
 }catch(e){}
-const save = () => { try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('保存失败，请导出备份'); } };
+try{ localStorage.removeItem('xhs-writing-desk-v3'); localStorage.removeItem('xhs-gap-studio-v1'); }catch(e){}
+if(S.articles.length && !S.articles.some(a=>a.id===S.activeId)) S.activeId=S.articles[0].id;
+
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('保存失败，请导出备份'); } };
+save();
+
 let toastTimer;
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2000); }
 function copy(text,label){
@@ -112,10 +139,12 @@ function copy(text,label){
   if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(done).catch(fallback); } else fallback();
   function fallback(){ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');done();}catch(e){toast('复制失败，请手动选中');} document.body.removeChild(ta); }
 }
+function timeAgo(ts){ const d=Date.now()-(ts||Date.now()); if(d<60000)return '刚刚'; if(d<3600000)return Math.floor(d/60000)+'分钟前'; if(d<86400000)return Math.floor(d/3600000)+'小时前'; return new Date(ts).toLocaleDateString('zh-CN',{month:'numeric',day:'numeric'}); }
+function current(){ return S.articles.find(a=>a.id===S.activeId)||null; }
 
 const TABS=[['topics','选题'],['write','写作区']];
-$('#nav').innerHTML = TABS.map((t,i)=>`<button data-t="${t[0]}" class="${i===0?'on':''}">${t[1]}</button>`).join('');
-$('#nav').onclick = e => { const b=e.target.closest('button[data-t]'); if(b) go(b.dataset.t); };
+$('#nav').innerHTML=TABS.map((t,i)=>`<button data-t="${t[0]}" class="${i===0?'on':''}">${t[1]}</button>`).join('');
+$('#nav').onclick=e=>{ const b=e.target.closest('button[data-t]'); if(b) go(b.dataset.t); };
 function go(t){
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='s-'+t));
@@ -123,32 +152,160 @@ function go(t){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ---------- 选题：只有自己加的选题 ---------- */
+/* ---------- 选题 ---------- */
 function rTopics(){
-  const list = S.topics.map((t,i)=>`<div class="list-item">
+  const list=S.topics.map((t,i)=>`<div class="list-item">
     <div class="row"><div class="li-title">${t.done?'<span class="pill gray">已写</span> ':''}${esc(t.text)}</div></div>
     <div class="li-acts">
       <button class="btn sm" data-write="${i}">写这篇 →</button>
       <button class="btn sm" data-done="${i}">${t.done?'标待写':'标已写'}</button>
       <button class="btn sm" data-del="${i}">删</button>
     </div></div>`).join('');
-  $('#s-topics').innerHTML = `
+  $('#s-topics').innerHTML=`
   <div class="card">
     <h2>选题</h2>
-    <p class="hint">想到什么就记下来，点「写这篇」标题会自动带进写作区。没有预设内容，全是你自己写的。</p>
+    <p class="hint">想到什么记下来。点「写这篇」会新建一篇文章，标题自动带过去；如果已有同选题的文章，会直接打开它。</p>
     <div class="row"><input type="text" id="newTopic" placeholder="记一个选题…" class="grow"><button class="btn pri" id="addTopic">加进选题</button></div>
-    <div style="margin-top:16px">${list || '<div class="note">还没有选题。上面加一条试试。</div>'}</div>
+    <div style="margin-top:16px">${list||'<div class="note">还没有选题。上面加一条试试。</div>'}</div>
   </div>`;
-  $('#addTopic').onclick = () => { const v=$('#newTopic').value.trim(); if(!v)return; S.topics.push({text:v,done:false}); save(); rTopics(); toast('已加进选题'); };
-  $('#newTopic').onkeydown = e => { if(e.key==='Enter') $('#addTopic').click(); };
-  $('#s-topics').onclick = e => {
-    const w=e.target.closest('[data-write]'); if(w){ S.editor.ref=S.topics[+w.dataset.write].text; S.editor.title=S.topics[+w.dataset.write].text; save(); go('write'); return; }
+  $('#addTopic').onclick=()=>{ const v=$('#newTopic').value.trim(); if(!v)return; S.topics.push({text:v,done:false}); save(); rTopics(); toast('已加进选题'); };
+  $('#newTopic').onkeydown=e=>{ if(e.key==='Enter') $('#addTopic').click(); };
+  $('#s-topics').onclick=e=>{
+    const w=e.target.closest('[data-write]');
+    if(w){
+      const text=S.topics[+w.dataset.write].text;
+      const exist=S.articles.find(a=>a.topic===text);
+      if(exist){ S.activeId=exist.id; toast('已打开这篇，接着写'); }
+      else { const a={id:nowId(),title:text,draft:'',body:'',status:'draft',createdAt:Date.now(),updatedAt:Date.now(),topic:text}; S.articles.unshift(a); S.activeId=a.id; toast('已新建文章'); }
+      save(); go('write'); return;
+    }
     const d=e.target.closest('[data-done]'); if(d){ S.topics[+d.dataset.done].done=!S.topics[+d.dataset.done].done; save(); rTopics(); return; }
     const x=e.target.closest('[data-del]'); if(x){ S.topics.splice(+x.dataset.del,1); save(); rTopics(); return; }
   };
 }
 
-/* ---------- 写作区：标题 / 初稿 / 正文 ---------- */
+/* ---------- 文章库 ---------- */
+function renderArticleList(){
+  const el=$('#articleList'); if(!el)return;
+  const published=S.articles.filter(a=>a.status==='published').length;
+  const head=`<div class="row" style="margin-bottom:12px"><button class="btn pri" id="newArticle">+ 新建文章</button><span class="mini">共 ${S.articles.length} 篇 · 已发 ${published} 篇</span></div>`;
+  if(!S.articles.length){ el.innerHTML=head+'<div class="note">还没有文章。点「新建文章」开始写，或者去「选题」页点「写这篇」。</div>'; } else {
+  el.innerHTML=head+S.articles.map(a=>`
+    <div class="list-item ${a.id===S.activeId?'active':''}" data-id="${a.id}">
+      <div class="row">
+        <span class="pill ${a.status==='published'?'':'warm'}">${a.status==='published'?'已发':'草稿'}</span>
+        <div class="li-title" data-open="${a.id}">${esc(a.title||'无标题')}</div>
+      </div>
+      <div class="li-meta">更新于 ${timeAgo(a.updatedAt)} · 正文 ${count(a.body)} 字${a.topic?' · 来自选题：'+esc(a.topic):''}</div>
+      <div class="li-acts">
+        <button class="btn sm" data-open="${a.id}">${a.id===S.activeId?'正在编辑':'打开'}</button>
+        <button class="btn sm" data-pub="${a.id}">${a.status==='published'?'改回草稿':'标已发'}</button>
+        <button class="btn sm" data-dup="${a.id}">复制</button>
+        <button class="btn sm danger" data-del="${a.id}">删</button>
+      </div>
+    </div>`).join('');
+  }
+
+  el.onclick=e=>{
+    const n=e.target.closest('#newArticle');
+    if(n){
+      const x={id:nowId(),title:'',draft:'',body:'',status:'draft',createdAt:Date.now(),updatedAt:Date.now(),topic:''};
+      S.articles.unshift(x); S.activeId=x.id; save(); rWrite(); setTimeout(()=>$('#wTitle')&&$('#wTitle').focus(),60); return;
+    }
+    const o=e.target.closest('[data-open]'); if(o){ S.activeId=o.dataset.open; save(); rWrite(); window.scrollTo({top:0,behavior:'smooth'}); return; }
+    const p=e.target.closest('[data-pub]'); if(p){ const x=S.articles.find(y=>y.id===p.dataset.pub); x.status=x.status==='published'?'draft':'published'; save(); renderArticleList(); return; }
+    const d=e.target.closest('[data-dup]'); if(d){ const x=S.articles.find(y=>y.id===d.dataset.dup); const c=Object.assign({},x,{id:nowId(),title:(x.title||'无标题')+'（副本）',status:'draft',createdAt:Date.now(),updatedAt:Date.now()}); S.articles.unshift(c); S.activeId=c.id; save(); rWrite(); toast('已复制一篇'); return; }
+    const del=e.target.closest('[data-del]');
+    if(del){
+      const x=S.articles.find(y=>y.id===del.dataset.del);
+      if(!confirm(`删除「${x.title||'无标题'}」？不可恢复。`))return;
+      S.articles=S.articles.filter(y=>y.id!==del.dataset.del);
+      if(S.activeId===del.dataset.del) S.activeId=S.articles.length?S.articles[0].id:'';
+      save(); rWrite(); toast('已删除'); return;
+    }
+  };
+}
+
+function rWrite(){
+  const a=current();
+  $('#s-write').innerHTML=`
+  <div class="card">
+    <h2>我的文章</h2>
+    <p class="hint">每篇文章独立保存，切换到别的再回来，内容都还在。输入时自动存到本机。</p>
+    <div id="articleList"></div>
+  </div>
+
+  ${a?`
+  <div class="card">
+    <h2>正在编辑 <span class="pill">${esc(a.title||'无标题')}</span></h2>
+    <div class="field">
+      <label class="lbl">① 标题 <span class="pill">决定被不被点开</span></label>
+      <input type="text" id="wTitle" value="${esc(a.title)}" placeholder="写标题">
+      <div class="counter" id="cTitle"></div>
+    </div>
+    <div class="field">
+      <label class="lbl">② 初稿 <span class="pill gray">随便写 · 不用通顺</span></label>
+      <textarea id="wDraft" rows="9" placeholder="先把想说的都倒出来：真实细节、数字、情绪，不用管排版。">${esc(a.draft)}</textarea>
+      <div class="counter" id="cDraft"></div>
+    </div>
+    <div class="field">
+      <label class="lbl">③ 正文 <span class="pill">可发布版</span></label>
+      <textarea id="wBody" rows="15" placeholder="把初稿整理成能直接发的内容。">${esc(a.body)}</textarea>
+      <div class="counter" id="cBody"></div>
+    </div>
+    <div class="row">
+      <button class="btn pri" id="wScan">发布前体检</button>
+      <button class="btn" id="wCopyBody">复制正文</button>
+      <button class="btn" id="wCopyAll">复制标题 + 正文</button>
+      <button class="btn" id="wToDraft">正文→初稿备份</button>
+      <button class="btn danger" id="wClearThis">清空这篇三段</button>
+    </div>
+    <div id="scanOut"></div>
+  </div>`:`<div class="card"><div class="note">还没有正在编辑的文章。点上面「新建文章」开始。</div></div>`}
+
+  <div class="card warm">
+    <h2>备份</h2>
+    <p class="hint">所有文章和选题只存在这台设备的浏览器里。换设备或清缓存前先导出；新设备导入即可恢复。</p>
+    <div class="row"><button class="btn" id="expBtn">导出备份</button><button class="btn" id="impBtn">导入备份</button><input type="file" id="impFile" accept="application/json,.json" style="display:none"></div>
+    <div class="divider"></div>
+    <button class="btn danger" id="wipeBtn">清空全部数据</button>
+    <div class="note" style="margin-bottom:0">发布前请人工过一遍图文与标签；平台规则以小红书后台实时显示为准。</div>
+  </div>`;
+
+  renderArticleList();
+  if(!a) return;
+
+  const upd=()=>{
+    a.title=$('#wTitle').value; a.draft=$('#wDraft').value; a.body=$('#wBody').value; a.updatedAt=Date.now(); save();
+    const ph=(a.body.match(/__/g)||[]).length;
+    $('#cTitle').textContent=`${count(a.title)} 字${count(a.title)>20?'（建议 20 字内）':''}`;
+    $('#cDraft').textContent=`${count(a.draft)} 字`;
+    $('#cBody').innerHTML=`${count(a.body)} 字${ph?` · <b>还有 ${ph} 处 __ 没换</b>`:''}`;
+    const item=document.querySelector(`#articleList .list-item[data-id="${a.id}"]`);
+    if(item){
+      item.querySelector('.li-title').textContent=a.title||'无标题';
+      item.querySelector('.li-meta').textContent=`更新于 刚刚 · 正文 ${count(a.body)} 字${a.topic?' · 来自选题：'+a.topic:''}`;
+    }
+  };
+  ['wTitle','wDraft','wBody'].forEach(id=>$('#'+id).addEventListener('input',upd));
+  upd();
+
+  $('#wScan').onclick=()=>{
+    const res=scan($('#wTitle').value+'\n'+$('#wBody').value);
+    const bad=res.filter(r=>r.lv==='bad'), mid=res.filter(r=>r.lv==='mid');
+    $('#scanOut').innerHTML=`<div style="margin-top:14px">
+      ${bad.length?`<div class="note warn">${bad.length} 处建议改掉</div>`+bad.map(r=>`<div class="scan-line bad"><b>建议改</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
+      ${mid.length?`<div class="note">${mid.length} 处看一眼</div>`+mid.map(r=>`<div class="scan-line mid"><b>看一眼</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
+      ${!bad.length?`<div class="scan-line good">✅ 没发现掉秤承诺、功效宣称、专业背书或站外导流。${!mid.length?'全文干净。':''}</div>`:''}
+    </div>`;
+  };
+  $('#wCopyBody').onclick=()=>copy($('#wBody').value,'正文');
+  $('#wCopyAll').onclick=()=>copy(($('#wTitle').value?$('#wTitle').value+'\n\n':'')+$('#wBody').value,'标题+正文');
+  $('#wToDraft').onclick=()=>{ $('#wDraft').value=($('#wDraft').value?$('#wDraft').value+'\n\n—— 正文备份 ——\n\n':'')+$('#wBody').value; upd(); toast('正文已备份到初稿'); };
+  $('#wClearThis').onclick=()=>{ if(!confirm('清空这篇文章的标题、初稿、正文？其他文章不受影响。'))return; $('#wTitle').value='';$('#wDraft').value='';$('#wBody').value='';upd();$('#scanOut').innerHTML=''; };
+}
+
+/* 发布前体检规则 */
 const RULES=[
   {re:/(不反弹|根治多囊|改善多囊|降胰岛素|控糖|易瘦体质|躺瘦|不用运动也能瘦)/g,lv:'bad',why:'功效 / 疗效承诺'},
   {re:/([0-9一二三四五六七八九十]+\s*个月[^。\n]{0,6}(瘦回|减到|瘦到)\s*[0-9]+\s*斤)|(一个?月轻\s*[0-9.]+\s*(公斤|斤))|(体重一周记|[0-9]+\s*天瘦回)/g,lv:'bad',why:'结果 / 期限 / 称重承诺'},
@@ -162,87 +319,20 @@ const RULES=[
 ];
 function scan(text){ const out=[]; RULES.forEach(r=>{ r.re.lastIndex=0; const m=text.match(r.re); if(m) out.push({lv:r.lv,why:r.why,hit:[...new Set(m)].slice(0,4).join(' / ')}); }); return out; }
 
-function rWrite(){
-  const e=S.editor;
-  const opts = S.topics.length
-    ? `<option value="">不关联</option>`+S.topics.map((t,i)=>`<option value="${esc(t.text)}" ${e.ref===t.text?'selected':''}>${esc(t.text)}</option>`).join('')
-    : `<option value="">还没有选题</option>`;
-  $('#s-write').innerHTML = `
-  <div class="card">
-    <h2>写作区</h2>
-    <p class="hint">先写标题定钩子，再写初稿倒素材，最后整理成正文。内容自动存在本机，关页面不丢。</p>
-    <div class="field"><label class="lbl">关联选题
-      <select id="wRef" style="width:auto;min-width:180px;padding:6px 10px;font-size:12px">${opts}</select></label></div>
-
-    <div class="field">
-      <label class="lbl">① 标题 <span class="pill">决定被不被点开</span></label>
-      <input type="text" id="wTitle" value="${esc(e.title)}" placeholder="写标题">
-      <div class="counter" id="cTitle"></div>
-    </div>
-
-    <div class="field">
-      <label class="lbl">② 初稿 <span class="pill gray">随便写 · 不用通顺</span></label>
-      <textarea id="wDraft" rows="10" placeholder="先把想说的都倒出来：真实细节、数字、情绪、说不出口的话。这里不用管排版和通顺。">${esc(e.draft)}</textarea>
-      <div class="counter" id="cDraft"></div>
-    </div>
-
-    <div class="field">
-      <label class="lbl">③ 正文 <span class="pill">可发布版</span></label>
-      <textarea id="wBody" rows="16" placeholder="把初稿整理成能直接发的内容。">${esc(e.body)}</textarea>
-      <div class="counter" id="cBody"></div>
-    </div>
-
-    <div class="row">
-      <button class="btn pri" id="wScan">发布前体检</button>
-      <button class="btn" id="wCopyBody">复制正文</button>
-      <button class="btn" id="wCopyAll">复制标题 + 正文</button>
-      <button class="btn" id="wToDraft">正文→初稿备份</button>
-      <button class="btn danger" id="wClear">清空三段</button>
-    </div>
-    <div id="scanOut"></div>
-  </div>
-
-  <div class="card warm">
-    <h2>备份</h2>
-    <p class="hint">数据只在这台设备的浏览器里。换设备或清缓存前先导出；新设备导入即可恢复。</p>
-    <div class="row"><button class="btn" id="expBtn">导出备份</button><button class="btn" id="impBtn">导入备份</button><input type="file" id="impFile" accept="application/json,.json" style="display:none"></div>
-    <div class="divider"></div>
-    <button class="btn danger" id="wipeBtn">清空全部数据</button>
-    <div class="note" style="margin-bottom:0">发布前请人工过一遍图文与标签；平台规则以小红书后台实时显示为准。</div>
-  </div>`;
-
-  const count = t => (t||'').replace(/\s/g,'').length;
-  const upd = () => {
-    S.editor.title=$('#wTitle').value; S.editor.draft=$('#wDraft').value;
-    S.editor.body=$('#wBody').value; S.editor.ref=$('#wRef').value; save();
-    const ph=(S.editor.body.match(/__/g)||[]).length;
-    $('#cTitle').textContent=`${count(S.editor.title)} 字${count(S.editor.title)>20?'（建议 20 字内）':''}`;
-    $('#cDraft').textContent=`${count(S.editor.draft)} 字`;
-    $('#cBody').innerHTML=`${count(S.editor.body)} 字${ph?` · <b>还有 ${ph} 处 __ 没换</b>`:''}`;
-  };
-  ['wTitle','wDraft','wBody','wRef'].forEach(id=>{ $('#'+id).addEventListener('input',upd); $('#'+id).addEventListener('change',upd); });
-  upd();
-
-  $('#wRef').onchange = () => { const v=$('#wRef').value; if(v && !$('#wTitle').value) $('#wTitle').value=v; upd(); };
-  $('#wScan').onclick = () => {
-    const res=scan($('#wTitle').value+'\n'+$('#wBody').value);
-    const bad=res.filter(r=>r.lv==='bad'), mid=res.filter(r=>r.lv==='mid');
-    $('#scanOut').innerHTML=`<div style="margin-top:14px">
-      ${bad.length?`<div class="note warn">${bad.length} 处建议改掉</div>`+bad.map(r=>`<div class="scan-line bad"><b>建议改</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
-      ${mid.length?`<div class="note">${mid.length} 处看一眼</div>`+mid.map(r=>`<div class="scan-line mid"><b>看一眼</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
-      ${!bad.length?`<div class="scan-line good">✅ 没发现掉秤承诺、功效宣称、专业背书或站外导流。${!mid.length?'全文干净。':''}</div>`:''}
-    </div>`;
-  };
-  $('#wCopyBody').onclick = ()=>copy($('#wBody').value,'正文');
-  $('#wCopyAll').onclick = ()=>copy(($('#wTitle').value?$('#wTitle').value+'\n\n':'')+$('#wBody').value,'标题+正文');
-  $('#wToDraft').onclick = ()=>{ $('#wDraft').value = ($('#wDraft').value?$('#wDraft').value+'\n\n—— 正文备份 ——\n\n':'')+$('#wBody').value; upd(); toast('正文已备份到初稿'); };
-  $('#wClear').onclick = ()=>{ if(!confirm('清空标题、初稿、正文？选题不受影响。'))return; $('#wTitle').value='';$('#wDraft').value='';$('#wBody').value='';upd();$('#scanOut').innerHTML=''; };
-
-  $('#expBtn').onclick = ()=>{ const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='写作台备份_'+new Date().toLocaleDateString('sv-SE')+'.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('备份已导出'); };
-  $('#impBtn').onclick = ()=>$('#impFile').click();
-  $('#impFile').onchange = e => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.editor=Object.assign({ref:'',title:'',draft:'',body:''},p.editor||{}); S.topics=p.topics||[]; save(); toast('导入成功'); go('topics'); }catch(err){ toast('文件格式不对，没导入'); } }; r.readAsText(f); };
-  $('#wipeBtn').onclick = ()=>{ if(!confirm('清空全部数据？建议先导出备份。'))return; if(!confirm('再确认一次：所有选题和三段文字都会没了。'))return; S=DEFAULT(); save(); go('topics'); toast('已清空'); };
-}
+/* 备份按钮（全局） */
+$('#s-write').addEventListener('click',e=>{
+  if(e.target.closest('#newArticle')||e.target.closest('[data-open]')||e.target.closest('[data-pub]')||e.target.closest('[data-dup]')||e.target.closest('[data-del]')) return;
+  if(e.target.closest('#expBtn')){ const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='写作台备份_'+new Date().toLocaleDateString('sv-SE')+'.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('备份已导出'); return; }
+  if(e.target.closest('#impBtn')){ $('#impFile').click(); return; }
+  if(e.target.closest('#wipeBtn')){ if(!confirm('清空全部数据？建议先导出备份。'))return; if(!confirm('再确认一次：所有选题和所有文章都会没了。'))return; S=DEFAULT(); save(); go('topics'); toast('已清空'); return; }
+});
+$('#s-write').addEventListener('change',e=>{
+  if(e.target.id==='impFile'){
+    const f=e.target.files[0]; if(!f)return; const r=new FileReader();
+    r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.topics=p.topics||[]; S.articles=p.articles||[]; S.activeId=p.activeId||''; if(S.articles.length&&!S.articles.some(a=>a.id===S.activeId))S.activeId=S.articles[0].id; save(); toast('导入成功，共 '+S.articles.length+' 篇'); go('write'); }catch(err){ toast('文件格式不对，没导入'); } };
+    r.readAsText(f);
+  }
+});
 
 rTopics();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
