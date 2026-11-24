@@ -1,7 +1,7 @@
 {
-  "name": "缝隙 100 天 · 写作台",
-  "short_name": "缝隙写作台",
-  "description": "不改动生活，只改动生活里的缝隙 · 小红书选题、排期、文案与发布自检",
+  "name": "小言的写作台",
+  "short_name": "写作台",
+  "description": "选题、写作、体检——把真实发生的事写下来",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#FAF8F3">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="缝隙写作台">
+<meta name="apple-mobile-web-app-title" content="写作台">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<title>缝隙 100 天 · 写作台</title>
+<title>小言的写作台</title>
 <style>
 :root{
   --bg:#FAF8F3;--card:#FFF;--ink:#33352F;--ink2:#6E7269;--ink3:#9A9E94;
@@ -25,9 +25,7 @@ html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:900px;margin:0 auto;padding:0 16px 100px}
 header{padding:22px 0 8px}
-.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 h1{font-size:22px;font-weight:600;margin:0;letter-spacing:.5px}
-.brand .sub{font-size:12.5px;color:var(--ink3)}
 .motto{margin:8px 0 0;font-size:13px;color:var(--green-d);font-weight:500}
 .motto small{display:block;font-weight:400;color:var(--ink3);font-size:12px;margin-top:2px}
 nav{display:flex;gap:8px;padding:12px 0 14px;position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:1px solid var(--line);margin-bottom:20px}
@@ -37,10 +35,8 @@ section{display:none;animation:fade .2s ease}
 section.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
-.card.tint{background:var(--green-l);border-color:#DCE8DC}
 .card.warm{background:var(--warm-l);border-color:#F0E2D2}
 h2{font-size:17px;font-weight:600;margin:0 0 4px}
-h3{font-size:14px;font-weight:600;margin:18px 0 9px;color:var(--green-d)}
 .hint{font-size:12.5px;color:var(--ink3);margin:0 0 14px;line-height:1.6}
 .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
 .grow{flex:1;min-width:0}
@@ -50,40 +46,22 @@ h3{font-size:14px;font-weight:600;margin:18px 0 9px;color:var(--green-d)}
 .btn.pri:hover{background:var(--green-d);color:#fff}
 .btn.sm{padding:5px 10px;font-size:12px}
 .btn.danger{color:var(--rose);border-color:#EBD4D0}
-.btn.on{background:var(--green-l);border-color:var(--green);color:var(--green-d)}
-input[type=text],input[type=date],textarea,select{font-family:var(--font);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line2);border-radius:var(--rs);padding:10px 12px;outline:none;width:100%}
+input[type=text],textarea,select{font-family:var(--font);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line2);border-radius:var(--rs);padding:10px 12px;outline:none;width:100%}
 input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-l)}
 textarea{resize:vertical;line-height:1.85}
 label.lbl{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:8px;margin:0 0 7px;font-weight:500}
 label.lbl .pill{margin-left:auto}
 .field{margin-bottom:18px}
 .pill{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--green-l);color:var(--green-d);font-weight:500;white-space:nowrap}
-.pill.warm{background:var(--warm-l);color:var(--warm)}
-.pill.rose{background:var(--rose-l);color:var(--rose)}
 .pill.gray{background:#F2F1EC;color:var(--ink3)}
-.pill.node{background:var(--green);color:#fff}
 .list-item{border:1px solid var(--line);border-radius:var(--rs);padding:12px 13px;margin-bottom:8px;background:var(--card)}
 .li-title{flex:1;min-width:180px;font-size:14px;line-height:1.55}
-.li-meta{font-size:12px;color:var(--ink3);margin-top:4px;line-height:1.65}
 .li-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
-.grp-title{font-size:12px;font-weight:600;color:var(--green-d);letter-spacing:.5px;margin:20px 0 9px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.grp-title:first-child{margin-top:2px}
-.doc{border:1px solid var(--line);border-radius:var(--rs);margin-bottom:8px;overflow:hidden}
-.doc-h{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none}
-.doc-h:hover{background:#FCFBF7}
-.doc-h .t{flex:1;font-size:14px;font-weight:500;min-width:0}
-.doc-b{display:none;border-top:1px solid var(--line);padding:13px;background:#FDFCFA}
-.doc.open .doc-b{display:block}
-.doc-b pre{white-space:pre-wrap;word-break:break-word;font-family:var(--font);font-size:13px;line-height:1.8;margin:0}
-.chev{font-size:11px;color:var(--ink3);transition:.2s}
-.doc.open .chev{transform:rotate(90deg)}
 .counter{font-size:12px;color:var(--ink3);margin-top:7px}
 .counter b{color:var(--warm);font-weight:600}
 .note{font-size:12.5px;color:var(--ink2);background:#FCFBF7;border-left:3px solid var(--line2);padding:9px 12px;border-radius:0 var(--rs) var(--rs) 0;margin:10px 0;line-height:1.7}
 .note.warn{background:var(--rose-l);border-left-color:#DCA9A3;color:#8B4B45}
 .note.ok{background:var(--green-l);border-left-color:#A8C6AE;color:var(--green-d)}
-.tag-cloud{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.tag{font-size:12px;color:var(--green-d);background:var(--green-l);padding:3px 9px;border-radius:999px;cursor:pointer}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-size:13.5px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .scan-line{padding:9px 11px;border-radius:var(--rs);margin-bottom:6px;line-height:1.6;font-size:13px}
@@ -91,19 +69,17 @@ label.lbl .pill{margin-left:auto}
 .scan-line.mid{background:var(--warm-l);color:#8A5C35}
 .scan-line.good{background:var(--green-l);color:var(--green-d)}
 .divider{height:1px;background:var(--line);margin:18px 0}
-.mini{font-size:12px;color:var(--ink3)}
-.secbar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
 @media(max-width:640px){
   .wrap{padding:0 12px 90px}header{padding:16px 0 6px}h1{font-size:19px}
-  .card{padding:14px}.list-item{padding:12px 11px}.li-meta{font-size:11.5px;line-height:1.7}
-  .btn{padding:7px 11px}.btn.sm{padding:5px 9px}.secbar{flex-wrap:wrap}
+  .card{padding:14px}.list-item{padding:12px 11px}
+  .btn{padding:7px 11px}.btn.sm{padding:5px 9px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <div class="brand"><h1>缝隙 100 天 · 写作台</h1><span class="sub">小言的爱与成长</span></div>
+  <h1>小言的写作台</h1>
   <p class="motto">三分钟热度也没关系，多来几个三分钟
     <small>只写真实发生的事 · 不美化失败 · 不承诺结果</small></p>
 </header>
@@ -113,222 +89,20 @@ label.lbl .pill{margin-left:auto}
 </div>
 <div class="toast" id="toast"></div>
 
-<script id="DATA" type="application/json">
-
-{
-  "schedule": [
-    {"n":1,"day":1,"node":"开张","title":"我开了个「不折腾」的 100 天实验","type":"连","asset":"图"},
-    {"n":2,"day":3,"node":"","title":"今天只勾了一格，也算开场","type":"翻","asset":"图"},
-    {"n":3,"day":7,"node":"节点","title":"第 7 天，我差点断在第一周","type":"连","asset":"图"},
-    {"n":4,"day":10,"node":"","title":"先吃菜再吃饭，这顺序真有那么神？","type":"拆","asset":"图"},
-    {"n":5,"day":12,"node":"","title":"翻车日：今天六格全空，但我没删记录","type":"翻","asset":"图"},
-    {"n":6,"day":14,"node":"节点","title":"两周下来，哪件最容易、哪件最空","type":"连","asset":"回"},
-    {"n":7,"day":17,"node":"","title":"「不买特别的菜」不是凑合，是放过自己","type":"拆","asset":"图"},
-    {"n":8,"day":19,"node":"","title":"加分项怎么用才不变成压力","type":"人","asset":"图"},
-    {"n":9,"day":21,"node":"节点","title":"都说 21 天养成习惯，我没感觉","type":"连","asset":"图"},
-    {"n":10,"day":24,"node":"","title":"「不换衣服运动」：不出汗也算数","type":"拆","asset":"图"},
-    {"n":11,"day":27,"node":"","title":"你们问最多的：食堂外卖怎么勾","type":"问","asset":"图"},
-    {"n":12,"day":30,"node":"节点","title":"一个月没上秤，身体没说话，日子先变了","type":"连","asset":"回"},
-    {"n":13,"day":35,"node":"","title":"「不算任何一个数」：拳头就是我的尺","type":"拆","asset":"图"},
-    {"n":14,"day":40,"node":"","title":"食堂打饭、外卖点单，我的勾法","type":"人","asset":"图"},
-    {"n":15,"day":45,"node":"","title":"最常见的 5 个借口，我全中过","type":"共","asset":"图"},
-    {"n":16,"day":50,"node":"节点","title":"半程了，我只改了 3 个缝隙","type":"连","asset":"回"},
-    {"n":17,"day":55,"node":"","title":"饭后走 10 分钟：保底项为什么是它","type":"拆","asset":"图"},
-    {"n":18,"day":60,"node":"","title":"主食少盛一拳头，不戒碳水怎么做到","type":"拆","asset":"图"},
-    {"n":19,"day":63,"node":"","title":"带娃 / 出差，缝隙怎么留","type":"人","asset":"图"},
-    {"n":20,"day":66,"node":"节点","title":"第 66 天，朋友问我是不是瘦了","type":"连","asset":"图"},
-    {"n":21,"day":70,"node":"","title":"今天没喝含糖饮料：奶茶换成了什么","type":"拆","asset":"图"},
-    {"n":22,"day":72,"node":"","title":"空状态那天，我没逼自己补","type":"翻","asset":"图"},
-    {"n":23,"day":75,"node":"节点","title":"剩下 25 天，我开始怕结束","type":"连","asset":"图"},
-    {"n":24,"day":80,"node":"","title":"1 分钟小动作：扶椅深蹲 / 踮脚 / 靠墙站","type":"拆","asset":"图"},
-    {"n":25,"day":85,"node":"","title":"晚饭后刷牙收口：夜宵是怎么没的","type":"拆","asset":"图"},
-    {"n":26,"day":88,"node":"","title":"一起勾的人：我们互相没督促，却都没断","type":"共","asset":"图"},
-    {"n":27,"day":90,"node":"节点","title":"90 天回头看，最难的不是做而是不中断","type":"连","asset":"回"},
-    {"n":28,"day":95,"node":"","title":"100 天前最后一次翻车","type":"翻","asset":"图"},
-    {"n":29,"day":97,"node":"","title":"给准备开始的人：别学我，学这个","type":"人","asset":"图"},
-    {"n":30,"day":100,"node":"节点","title":"100 天毕业：我没瘦多少，但日子换了","type":"连","asset":"回"}
-  ],
-  "howByType": {
-    "连":"锚笔记 · 用工具分享图当封面（自带 Day/100）；写一个真实小细节；结尾预告下个节点。",
-    "翻":"翻车日才是涨粉日 · 故意写没做到的一天，空着的格子留白；结尾问「你们今天勾了几格」。",
-    "拆":"只讲「缝隙藏在哪」和「我怎么做到的」，不讲原理、不写机制。",
-    "共":"开头补一句白话翻译层；写给「也反弹过 / 也讨厌办卡」的人。",
-    "人":"统一「我自己的做法」口径；不写「这样能瘦」「适合多囊」。",
-    "问":"挑评论里真实出现过的问题答；专业提问用统一回复模板，不给方案。"
-  },
-  "topics": [
-    {"cat":"A · Day 连载（v3 原文 10 条）","items":[
-      "Day 01｜从今天起，我不改动生活，只改缝隙",
-      "Day 03｜今天只勾了一格，也算没断",
-      "Day 07｜一周翻回去看，我真正做到的其实只有两件",
-      "Day 12｜出差/带娃忙乱的一天，六个格子空了五个",
-      "Day 20｜最容易被跳过的是哪一格",
-      "Day 30｜一个月了，我没称过一次",
-      "Day 50｜halfway，讲一件我没预料到的事",
-      "Day 66｜空了几天，我回来接着勾了",
-      "Day 88｜这套方法里，我偷偷改过的一个细节",
-      "Day 100｜一百天结束，我留下的和扔掉的"
-    ]},
-    {"cat":"B · 六件事拆解（原文 6 条）","items":[
-      "饭后走 10 分钟：走廊也算，我连鞋都没换",
-      "吃饭顺序：菜→肉蛋豆→米饭，食堂和外卖照样能用",
-      "主食少一拳头：不戒碳水，只是盛的时候手抖一下",
-      "不喝含糖饮料：奶茶换无糖茶，我没有戒，只是换了",
-      "1 分钟小动作：扶椅深蹲 / 踮脚 / 靠墙站，等水开的时候就做完",
-      "刷牙收口：刷完牙就不再吃，比「忍住不吃」容易太多"
-    ]},
-    {"cat":"B · 每件按 3 视角展开（模板生成，可自行改）","items":[
-      "饭后走｜缝隙藏在哪：饭后本来就要起身，只是多走两分钟",
-      "饭后走｜我怎么做到的：把鞋放在门边，走到快递柜就回来",
-      "饭后走｜做不到的那天：下雨，在走廊来回走了几趟，也算",
-      "吃饭顺序｜缝隙藏在哪：不用换菜，只换夹菜的先后",
-      "吃饭顺序｜我怎么做到的：先夹两口菜再动饭，食堂外卖都能用",
-      "吃饭顺序｜做不到的那天：全是盖饭，那就先把菜挑出来吃",
-      "主食一拳｜缝隙藏在哪：盛饭那一下手抖一点就够了",
-      "主食一拳｜我怎么做到的：换个稍小的碗，不用数不用称",
-      "主食一拳｜做不到的那天：盛多了就吃，明天再少一点",
-      "含糖饮料｜缝隙藏在哪：不是戒，是换一个默认选项",
-      "含糖饮料｜我怎么做到的：包里常备无糖茶，点单默认去糖",
-      "含糖饮料｜做不到的那天：喝了就喝了，不补偿、不追加",
-      "1 分钟动作｜缝隙藏在哪：等水开、等电梯、扶椅子那一下",
-      "1 分钟动作｜我怎么做到的：三选一，哪个顺手做哪个",
-      "1 分钟动作｜做不到的那天：完全没做，格子空着就好",
-      "刷牙收口｜缝隙藏在哪：用「刷牙」这个已有动作当收口",
-      "刷牙收口｜我怎么做到的：刷完就不再进厨房，比忍容易",
-      "刷牙收口｜做不到的那天：刷完又吃了，记一笔不删"
-    ]},
-    {"cat":"C · 三个不 / 观点向（原文 6 条）","items":[
-      "我为什么不买「减脂食材」：家里做什么我就吃什么",
-      "不换衣服运动之后，我反而没断过",
-      "把体重秤收起来的第 __ 天",
-      "不算卡路里，我用拳头估，够用了",
-      "那些要我先准备好才能开始的方法，我都放弃了",
-      "「不算数字」和「想知道有没有进展」怎么同时成立"
-    ]},
-    {"cat":"D · 一起勾的人（原文 4 条 + 执行包补充）","items":[
-      "一起勾 100 天｜第 1 天开始，不用报名不用打卡截图",
-      "读者里「只做一件」的那些日子，我看哭了",
-      "有人问我断了怎么办：空着就好",
-      "六格记录长什么样（逐格讲解）",
-      "「我把体重秤收起来了」——被秤绑架过的人",
-      "空了三天回来接着勾，不用重新开头",
-      "100 天回顾页：我空得最多的那一格",
-      "每周留一顿随便吃，不用补偿"
-    ]}
-  ],
-  "hooks": [
-    {"k":"痛点","t":"「不节食不运动」听了八百遍，为什么还是没用？"},
-    {"k":"反转","t":"我减肥唯一做对的事，是没逼自己。"},
-    {"k":"共鸣","t":"明明什么都没变，秤却纹丝不动——你是不是也这样？"},
-    {"k":"利益","t":"每天 6 件顺手小事，0 采购 0 装备 0 计算。"},
-    {"k":"数字","t":"100 天，我只改了生活里的 3 个缝隙。"},
-    {"k":"悬念","t":"我把体重秤收起来了，然后发生了什么？"},
-    {"k":"痛点","t":"办卡第 3 天就荒废的人，这篇是给你写的。"},
-    {"k":"共鸣","t":"减脂最难的不是做，是「别中断」。"},
-    {"k":"反转","t":"「管住嘴迈开腿」这六个字，我重新理解了一次。"},
-    {"k":"利益","t":"一个勾格子的免费小工具，替我把 100 天记了下来。"}
-  ],
-  "templates": [
-    "不改动生活，只改动生活里的缝隙｜Day __ / 100",
-    "不买菜、不换衣服、不算数字，我靠 6 件小事过了 __ 天",
-    "今天只做了 1 件，也算没断",
-    "减脂不用准备任何东西：我连体重秤都收起来了",
-    "6 件小事，每件 1 分钟以内，第 __ 天",
-    "道理没用，能连做一百天才有用",
-    "我把「管住嘴迈开腿」缩小到 6 个缝隙",
-    "食堂 / 外卖 / 家里，同一套顺序都能用"
-  ],
-  "numbersOk": ["3 个不 / 6 件小事 / 100 天 / 1 分钟 / 10 分钟 / 一拳头","Day 07 / 100、第 66 天、半程","121→105→115（真实经历，不是效果承诺）","「今天只勾了一格」"],
-  "numbersNo": ["一个月瘦 X 斤、X 天瘦 X 公斤","瘦回 105 斤（当承诺写）","不反弹、一个月后裤子会告诉你","任何体质 / 人群的效果保证"],
-  "quotes": [
-    "不改动我的生活，只改动生活里的缝隙",
-    "不算身体的账，只算日子的账",
-    "只做一件，也算没断",
-    "道理没用，能连做一百天才有用",
-    "难的不是减肥，是每天狠狠要求自己",
-    "一百天里，我不想重新开头任何一次",
-    "减肥不用很用力，不停下就好"
-  ],
-  "tags": ["#不节食减肥","#生活化减脂","#减脂打卡","#反弹后重启","#PCOS减脂","#缝隙100天","#慢慢瘦","#不算卡路里","#不称重","#带娃日常","#减脂心态","#记100天"],
-  "translate": [
-    "「缝隙」说白了就是：不用额外腾时间，只在原本就要做的事上动一点点。",
-    "不改菜、不换衣服、不算数字，就 6 个小动作，我管它叫缝隙。",
-    "不是什么新方法，是把那些方法缩小到能塞进生活里。"
-  ],
-  "profiles": [
-    {"name":"A · 功能词在前（推荐）","nick":"小言的爱与成长｜不改动生活的减脂","bio":"不改动生活，只改 6 件小事 🌿\n不买菜 / 不换衣服 / 不算数字\n📖 缝隙 100 天 · Day __\n（说白了：吃饭换个顺序、饭后走 10 分钟、刷完牙不再吃）\n💬 道理没用，能连做一百天才有用"},
-    {"name":"B · 三个不当筛选器","nick":"小言｜不节食不称重的一天 6 件","bio":"带娃 · 家里食堂外卖照旧\n只在缝隙里动手脚：吃饭顺序 / 饭后 10 分钟 / 刷牙收口\nPCOS｜只记自己的经历，不提供医学建议\n📖 Day __ / 100 · 六个格子记一笔\n💬 减肥不用很用力，不停下就好"},
-    {"name":"C · 与工具同名","nick":"小言｜慢慢瘦 · 记 100 天","bio":"不改动生活，只改 6 件小事 🌿\n不买菜 / 不换衣服 / 不算数字\n📖 缝隙 100 天 · Day __\n（说白了：吃饭换个顺序、饭后走 10 分钟、刷完牙不再吃）\n💬 道理没用，能连做一百天才有用"}
-  ],
-  "pinned": [
-    "①《不改动生活，只改缝隙》＝ 版本 F 主张宣言，定调整个号（或直接用《第 1 篇》重整版置顶，方法讲得最全）",
-    "② 数据最好的那篇 Day 连载（用真实记录，不是模板）",
-    "③《六格记录长什么样 / 我怎么用它记 100 天》工具首次正经露出，只展示不引导"
-  ],
-  "compliance": [
-    "不承诺掉秤数字 / 周期 / 效果；不写「能瘦 X 斤」「不反弹」",
-    "不写「改善 / 根治多囊」「控糖」「降胰岛素」；不写「进得比出得少」这类机制表述",
-    "不冒充医生 / 营养师，不解读报告；全篇保持「我自己的做法」",
-    "不卖代餐 / 减肥药 / 酵素 / 疗效保健品；不接体脂秤 / 卡路里 App 类商单",
-    "笔记 / 评论 / 私信不出现外部链接、微信号、站外收款；商业推广走蒲公英报备",
-    "收费在小红书平台内闭环（店铺 / 群聊付费功能）",
-    "所有占位符 __ 换成真实记录，没有就写「记了一阵子」，不编数字",
-    "发布前人工审核一遍，包括图片里的文字和话题标签"
-  ],
-  "signals": [
-    {"s":"评论区出现「我也是反弹了」「我也讨厌办卡 / 称重」","m":"需求命中、定位对（比点赞更重要）","d":"不用调，加大这类共鸣选题"},
-    {"s":"持续「收藏多、关注少」","m":"钩子够，但追更理由没立住","d":"强化 Day/100、下期预告、置顶串联"},
-    {"s":"曝光（小眼睛）一直低","m":"「被看见」不足","d":"只补标题 / 封面的数字与反差，不动内核"},
-    {"s":"三类信号都弱","m":"才轮到怀疑定位","d":"那时再谈调整，且优先调钩子不调方法"}
-  ],
-  "redline": ["三个不","不算数字","不承诺结果"],
-  "monetize": [
-    {"st":"0 · 现在（不看粉丝数）","act":"六格分享图当笔记素材；发起「一起勾 100 天」平台内内测 20~30 人","why":"零成本验证需求 + 最强涨粉钩子"},
-    {"st":"1 · 内测跑 2~3 周后","act":"陪伴营试水：开一期「一起勾 30 天」小营，不讲课、不给方案","why":"你选的先试项；风险最低、最快验证付费意愿；收款必须平台内闭环"},
-    {"st":"2 · 陪伴营跑通","act":"纸质《缝隙记录本》（100 页 · 一页 6 格）","why":"最贴合调性的实物，低成本低风险"},
-    {"st":"3 · 工具成熟","act":"小程序：基础六格免费，付费只放回顾导出 / 主题 / 一起勾的房间","why":"别对「勾格子」本身收费"},
-    {"st":"4 · 最后才考虑","act":"蒲公英报备商单（仅补充）","why":"绝不为它调整内容；体脂秤 / 卡路里 App / 代餐 / 健身卡绝对不接"}
-  ],
-  "whiteBlack": {
-    "ok":["无糖茶、水杯、普通餐具、小一号的碗","舒服的走路鞋、袜子、通勤小物","牙刷、牙膏、纸质笔记本、笔","家常食材（不宣称减脂功效）","记录类文具、日历、贴纸"],
-    "no":["代餐粉 / 减肥药 / 酵素 / 减肥茶","体脂秤、体重秤、卡路里 App、食物秤","健身卡、私教、瑜伽垫、运动服","空气炸锅等「先买装备才能开始」的东西","任何「7 天瘦 X 斤 / 躺瘦」类产品"]
-  },
-  "threeNo": ["不买特别的菜（家里 / 食堂 / 外卖照旧，只调顺序和分量）","不换衣服运动（不出汗、不用垫子）","不算任何数字（不称重、不查卡路里，只用拳头估）"],
-  "six": ["饭后走 10 分钟（三餐任选一餐，只做一件就够 · 保底项）","先吃菜，最后吃主食（菜 → 肉蛋豆 → 米饭）","主食少盛一拳头（不戒碳水，就少一点）","今天没喝含糖饮料（奶茶果汁换水、无糖茶）","做 1 分钟小动作（扶椅深蹲 / 踮脚 / 靠墙站，三选一）","晚饭后刷牙收口（刷完牙就不再吃，夜宵自然没了）"],
-  "flywheel": ["笔记 Day/100 连载","关注追更","工具勾格子","分享图回灌成新素材","真实记录沉淀信任 → 变现","信任回流成新笔记"],
-  "naming": [
-    {"l":"搜得到层","w":"功能词 / 白话","p":"昵称、标题前段、话题标签","e":"小言｜不改动生活的减脂 · #生活化减脂"},
-    {"l":"翻译层","w":"一句大白话","p":"正文第 2～3 行，一次就够","e":"不改菜、不换衣服、不算数字，就 6 个小动作"},
-    {"l":"记得住层","w":"意象词「缝隙」","p":"封面角标、系列名、签名、关于页","e":"缝隙 100 天 · Day __"}
-  ]
-}
-
-</script>
-
 <script>
 "use strict";
-const D = JSON.parse(document.getElementById('DATA').textContent);
-const KEY = 'xhs-gap-studio-v1';
+const KEY = 'xhs-writing-desk-v3';
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const DEFAULT = () => ({
-  startDate:'', schedule:{}, topics:{}, customTopics:[], checks:{},
-  editor:{ref:'',title:'',draft:'',body:''}, settings:{}
-});
+/* 清掉旧版本数据与存储键 */
+try{ localStorage.removeItem('xhs-gap-studio-v1'); }catch(e){}
+
+const DEFAULT = () => ({ topics:[], editor:{ref:'',title:'',draft:'',body:''} });
 let S = DEFAULT();
 try{
   const raw = localStorage.getItem(KEY);
-  if(raw){
-    const p = JSON.parse(raw);
-    S = Object.assign(DEFAULT(), p);
-    S.editor = Object.assign({ref:'',title:'',draft:'',body:''}, p.editor||{});
-    S.startDate = p.startDate || '';
-    S.schedule = p.schedule || {};
-    S.topics = p.topics || {};
-    S.customTopics = p.customTopics || [];
-    S.checks = p.checks || {};
-  }
+  if(raw){ const p=JSON.parse(raw); S=Object.assign(DEFAULT(),p); S.editor=Object.assign({ref:'',title:'',draft:'',body:''},p.editor||{}); }
 }catch(e){}
 const save = () => { try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('保存失败，请导出备份'); } };
 let toastTimer;
@@ -338,170 +112,6 @@ function copy(text,label){
   if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(done).catch(fallback); } else fallback();
   function fallback(){ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');done();}catch(e){toast('复制失败，请手动选中');} document.body.removeChild(ta); }
 }
-
-/* ---------- 文案库（保留原有全部内容，作为选题页的参考区） ---------- */
-const DOCS = [];
-function addDoc(group,title,text,note){ DOCS.push({group,title,text,note:note||''}); }
-addDoc('Day 1 · 重写版（三选一）','A · 两张清单【主推 · 定调/置顶】',"上一次减肥，我给自己列了 4 条规矩。\n全做到了，瘦了 16 斤。\n然后全丢了。\n\n今年 4 月，121 斤。\n算着热量吃、戒掉所有高糖高热量、每天运动 25 分钟以上、早睡不熬夜。\n三个多月，到 7 月底，105 斤。镜子里的自己确实变了。\n\n然后我慢慢松了：\n运动从每天变成一周 3 次，再变成不动；\n面包、蛋糕、奶茶一样样回来，最后连热量都懒得看了。\n9 月底 110，我想「能接受」。\n今天 115。心里难受，可也只能接受。\n\n我以前以为是我不够自律。\n后来才明白：那张清单要我每天重新做一次决定。\n买什么、算多少、练多久、几点睡——\n一天要赢四次，赢了三个多月，第四个月就不想赢了。\n\n所以这回我没列「要做什么」，列了 3 条「不用做」：\n🚫 不买特别的菜（家里 / 食堂 / 外卖照旧，只调顺序和分量）\n🚫 不换衣服运动（不出汗、不用垫子）\n🚫 不算任何数字（不称重、不查卡路里，只用拳头估）\n\n每天就 6 件顺手的小事：\n🚶 饭后走 10 分钟（三餐任选一餐，只做一件就做这件）\n🥬 先吃菜，最后吃主食\n🍚 主食少盛一拳头，不戒碳水\n🥤 不喝含糖饮料，换水或无糖茶\n💪 1 分钟小动作：扶椅深蹲 / 踮脚 / 靠墙站\n🦷 晚饭后刷牙收口，刷完就不再吃\n\n没有一样需要我「准备好」。\n不用买、不用换、不用算，也不用重新做一次决定。\n\n道理谁都懂，能连做一百天才有用。\n所以这次我不定终点、不称体重，只记第几天。\n一页 6 格，勾了就勾了，空着的留白，回来接着勾。\n每周还留一顿随便吃，不用补偿——人得喘口气。\n\nDay 01 / 100。\n就当做个实验：不改动生活，只改动生活里的缝隙。\n要一起吗？不用报名，明天照常过日子就行 👇\n只做一件，也算数。\n\n#不节食减肥 #生活化减脂 #减脂打卡 #反弹后重启 #PCOS减脂 #缝隙100天 #慢慢瘦",'标题：我开了个「不折腾」的 100 天实验｜封面：全做到了，然后全丢了｜约 641 字｜已按红线删掉结果承诺、称重、功效承诺、机制表述与说教结尾');
-addDoc('Day 1 · 重写版（三选一）','B · 共鸣短版【起量用】',"今天，115 斤。\n4 月是 121，7 月底是 105。\n中间这几个月，我没做错什么，只是不想再逼自己了。\n\n那三个多月我算着热量吃、每天运动 25 分钟、早睡，一样没落下。\n然后运动变成一周 3 次，再变成不动；面包蛋糕奶茶回来了；9 月底 110，今天 115。\n\n最难的不是胖回来，是那种「我又失败了」的感觉。\n可我什么都没做错，我只是不想再每天逼自己四次了。\n\n所以这回换个玩法：不改动生活，只改动生活里的缝隙。\n三个「不」：不买特别的菜、不换衣服运动、不算任何数字。\n每天 6 件顺手小事：饭后走 10 分钟、先吃菜后吃饭、主食少一拳头、不喝含糖饮料、1 分钟小动作、刷完牙就不再吃。\n\n不称重，不算账，只记第几天。\n一页 6 格，只做一件也算没断。\n\nDay 01 / 100。一起吗？👇\n\n#不节食减肥 #生活化减脂 #减脂打卡 #反弹后重启 #缝隙100天 #慢慢瘦",'标题：121→105→115，我把减肥做成了过山车｜约 312 字｜标题数字串点击力最强，方法只点到为止');
-addDoc('Day 1 · 重写版（三选一）','C · 观点反自律型【最容易引讨论】',"以前我以为，减肥失败是因为我不够自律。\n后来才发现，是我给自己列了太多「必须做」。\n\n4 月初 121 斤，我列了 4 条：算着热量吃、戒掉高糖高热量、每天运动 25 分钟以上、早睡。\n三个多月，7 月底 105 斤。全做到了。\n然后全丢了。\n\n运动从每天到一周 3 次，再到不动；面包蛋糕奶茶一样样回来；9 月底 110，今天 115。\n\n那 4 条没错，错在它们要我一天赢四次。\n买什么、算多少、练多久、几点睡——\n每一次都是重新做一次决定。\n赢了三个多月，第四个月我就不想赢了。\n\n所以这回我反过来列：只写「不用做」的。\n🚫 不买特别的菜\n🚫 不换衣服运动\n🚫 不算任何数字\n\n剩下 6 件，全是原本就会顺手做的事：\n饭后走 10 分钟、先吃菜后吃饭、主食少一拳头、不喝含糖饮料、1 分钟小动作、刷完牙就不再吃。\n\n不用准备，不用重来，不用重新做决定。\n道理谁都懂，能连做一百天才有用。\n\n不称重，只记第几天。一页 6 格，只做一件也算没断。\nDay 01 / 100，一起吗？👇\n\n#不节食 #不算卡路里 #减脂心态 #生活化减脂 #缝隙100天 #不用很用力",'标题：我把那 4 条减肥规矩，全删了｜约 387 字｜观点密度最高，也可留到第 2 周补发');
-addDoc('第 1 篇 · 开篇 / 置顶','标题候选（4 选 1）',
-`121→105→115，我把减肥做成了过山车　〔数字 + 共鸣〕
-这辈子最后一次减肥，我换了个不累的玩法　〔反转 + 利益〕
-反弹 10 斤后，我决定把减肥塞进生活缝隙　〔悬念 + 利益〕
-不办卡不称重，我用「缝隙」慢慢瘦回去　〔利益 + 关键词〕`,'推荐第 1 个：真实经历串自带数字、反差与悬念，且不是效果承诺。');
-addDoc('第 1 篇 · 开篇 / 置顶','正文（小红书排版版 · 可直接发）',
-`今年 4 月初，我站在镜子前，看着 121 斤的自己，下了个决心：这辈子最后一次减肥。
-
-那时候满身是肉，裤子越穿越勒，衣服怎么穿怎么丑。我用了最狠的办法——严格饮食、每天运动 25 分钟以上、早睡、戒掉所有高糖高热量，连热量都一笔笔记。
-
-三个多月，到 7 月底，我真的到了 105 斤。镜子里的自己瘦了，虽然还有不满意的地方，但整体确实变了。
-
-然后，我松懈了。
-
-🍞 最先把运动丢了：每天 25 分钟，变成一周 3 次，再变成零。
-🧁 接着饮食也塌了：从不吃高热，到开始吃面包蛋糕奶茶，最后不管热量多少，想吃就吃。
-
-9 月底，胖回 110，我想着「能接受」。
-今天，115。心里难受，但又好像只能接受。
-
-我才知道：减肥本身不难，难的是「每天狠狠要求自己」这件事，我做不到了。
-
-所以这一回，我换玩法——
-
-不改动我的生活，只改动生活里的缝隙。
-
-🚫 三个「不」：
-• 不买特别的菜（家里 / 食堂 / 外卖照旧，只调顺序和分量）
-• 不换衣服运动（不出汗、不用垫子）
-• 不算任何数字（不称重、不查卡路里，只用拳头估）
-
-✅ 每天 6 件小事：
-🚶 饭后走 10 分钟（三餐任选一餐，只做一件就够）
-🥬 先吃菜，最后吃主食（菜 → 肉蛋豆 → 米饭）
-🍚 主食少盛一拳头（不戒碳水，就少一点）
-🥤 不喝含糖饮料（奶茶果汁换水、无糖茶）
-💪 做 1 分钟小动作（扶椅深蹲 / 踮脚 / 靠墙站，三选一）
-🦷 晚饭后刷牙收口（刷完牙就不再吃，夜宵自然没了）
-
-道理谁都懂：进得比出得少。但道理没用，能连做一百天才有用。
-
-这些动作单看都不惊人，胜在几乎不需要意志力。每周我还留一顿随便吃，不用补偿——人得喘口气。
-
-目标还是 105，但这次我不称体重，只记日子。
-
-所以这回，我想用 100 天，慢慢把缝隙填起来。如果你也试过狠办法又反弹，要不要一起？每天勾几格就行，只做一件也算数。`,'数字均为你的真实经历。发布前人工过一遍图文与标签。');
-addDoc('第 1 篇 · 开篇 / 置顶','配图顺序 + 话题标签',
-`配图 1（开头）落地镜 + 搭着的旧紧身裤 + 晨光留白 → 反弹痛点
-配图 2（中段）面包 / 半块蛋糕 / 奶茶 + 卷起的瑜伽垫 → 松懈塌了
-配图 3（结尾）三格餐盘 + 清水 + 靠背椅 + 傍晚柔光 → 新方案
-配图 4（可选）工具分享图 Day 1 / 100
-
-话题标签：
-#不节食减肥 #生活化减脂 #减脂打卡 #反弹后重启 #PCOS减脂 #缝隙100天 #慢慢瘦`,'三张插画已生成：img_01/02/03_*.svg（小红书直传建议转 JPG/PNG）。');
-addDoc('三版原创文案','F · 主张宣言型（置顶定调）',
-`封面：不改动生活 + 大字「只改缝隙」
-
-我给减肥定过很多计划，没有一个活过第二周。
-后来不定了。生活原样不动，只动缝隙里的那一点点 🌿
-
-我的三个「不」：
-🚫 不买特别的菜 —— 家里、食堂、外卖照旧，只调顺序和分量
-🚫 不换衣服运动 —— 不出汗、不用垫子、不用专门腾时间
-🚫 不算任何数字 —— 不称重、不查卡路里，只用拳头估
-
-每天就 6 件小事：
-1️⃣ 饭后走 10 分钟（只做一件，就做这件）
-2️⃣ 先吃菜，最后吃主食
-3️⃣ 主食少盛一拳头，不戒碳水
-4️⃣ 今天没喝含糖饮料
-5️⃣ 1 分钟小动作：扶椅深蹲 / 踮脚 / 靠墙站
-6️⃣ 晚饭后刷牙收口，刷完就不再吃
-
-没有一样需要我「准备好」。不用买、不用换、不用算，
-也不用重新做一次决定。
-
-道理谁都懂，难的是天天做得到。
-我把它缩小到：把门槛降到不需要意志力。📒
-
-所以从今天起记 100 天，一页 6 格，勾了就勾了，
-空着的留白，回来接着勾。只做一件，也算没断。
-
-Day 01 / 100。要一起吗？不用报名，明天照常过日子就行 👇
-
-#生活化减脂 #减脂日记 #不节食 #不算卡路里
-#带娃日常 #不办卡 #缝隙100天 #记100天`,'钩子：反预期 + 共鸣；金句「把门槛降到不需要意志力」。');
-addDoc('三版原创文案','G · Day 连载型（涨粉主力，故意写翻车日）',
-`封面：Day __ / 100 + 小字「今天只勾了一格」
-
-Day __ / 100。
-今天六个格子，只勾了一格 ☑️
-饭后下楼走了 10 分钟，没换衣服、没出汗，走到快递柜就回来了。
-
-其他五格都空着：
-中午食堂米饭没少盛，下午那杯奶茶也没换成茶，
-1 分钟小动作忘了，刷牙倒是刷了，但刷完又啃了两口水果。
-
-以前我会把这天判成「失败」，然后第二天索性不记了。
-现在不这么算了。空着就空着，格子留白，明天回来接着勾就好。
-
-第 1 件事我留了个位置叫「保底项」——
-不是因为它最管用，是因为忙到什么都做不了的那天，
-它最容易被顺手完成。🫧
-
-一百天里，我不想重新开头任何一次。
-你们今天勾了几格？一格也来说一声 👀
-
-#缝隙100天 #减脂日记 #生活化减脂 #不算卡路里
-#不节食 #带娃日常 #记100天`,'翻车日才是涨粉日、评论日。__ 换真实天数。');
-addDoc('三版原创文案','H · 三个不观点型（最容易爆，第 2 周发）',
-`封面：我把体重秤收起来了 + 小字「第 __ 天」
-
-减肥这几年，我买过最没用的东西，是那台体重秤。⚖️
-早上称、晚上称，吃多了称，喝水前也要称。
-数字一跳，一整天心情就跟着跳。
-后来我发现，我根本不是在减肥，我是在每天给自己打分。
-
-现在我一个数字都不算了：
-不称重，不查卡路里，不记围度。
-主食少多少？一个拳头，够了。多了少了，身体自带的尺子说了算。
-
-我唯一还在数的，是第几天。📒
-一页 6 格，勾了就勾了，空着的留白，回来接着勾。
-只做一件，也算没断。
-
-不算身体的账，只算日子的账。
-这句话是我第 __ 天想明白的。
-
-有同款「被秤绑架过」的吗 🙋
-
-#不算卡路里 #不称重 #减脂心态 #生活化减脂
-#缝隙100天 #和身体和解 #记100天`,'工具已删体重模块，这篇言行一致，比改之前更成立。');
-addDoc('内测 · 评论区版','① 招募笔记',
-`标题：想一起「不折腾」减脂 100 天的人，扣 1
-
-不节食、不办卡、不称重，每天就 6 件顺手小事。
-我做了个能勾格子的免费小工具，自己在用。
-想一起记满 100 天互相壮胆的，评论区扣「勾」，
-我拉你进群，咱们在评论区和群里一起打卡。`,'正文只说「扣勾 / 进群」，不出现网址、不写微信、不写加我。');
-addDoc('内测 · 评论区版','② 评论区置顶回复',
-`想一起的宝子扣个「勾」👌 我拉进群，
-群里发工具用法，每天来评论区报一句「Day__ 勾了」就行，
-只做一件也算数，断了回来接着勾，没压力～`,'');
-addDoc('内测 · 评论区版','③ 日常打卡互动话术',
-`想跟的扣「勾」，进群一起记 100 天。
-今天你勾了几格？评论区报个数，我挨个回。`,'节点笔记下引导用。');
-addDoc('内测 · 评论区版','陪伴营试水要点',
-`1. 内测期（0 成本）：评论区 + 群聊跑 2~3 周，验证「有人愿意每天来勾、愿意互相壮胆」。
-2. 陪伴营试水：挑活跃的人开一期「一起勾 30 天」小营。
-   · 形式：群聊打卡 + 你每周 1 篇节点笔记当领路人，不讲课、不给方案
-   · 客单：先极低价或「前 10 人免费换反馈」测支付意愿，再定 9.9~39 区间
-   · 收款必须在平台内，严禁私收微信转账
-3. 跑通后再做纸本《缝隙记录本》
-4. 商单仍最后`,'守住「不专业」人设与合规；不讲课、零资质风险。');
-
-let docSearch='';
-
 
 const TABS=[['topics','选题'],['write','写作区']];
 $('#nav').innerHTML = TABS.map((t,i)=>`<button data-t="${t[0]}" class="${i===0?'on':''}">${t[1]}</button>`).join('');
@@ -513,126 +123,72 @@ function go(t){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ---------- 选题页：排期 + 选题库 + 参考文案 ---------- */
-let topicFilter='all', topicSearch='';
-function topicKey(cat,i){ return cat+'|'+i; }
+/* ---------- 选题：只有自己加的选题 ---------- */
 function rTopics(){
-  const sc = n => S.schedule[n] || (S.schedule[n]={status:'todo',date:'',note:'',title:''});
-  let planHtml='';
-  D.schedule.forEach(x=>{
-    const st=sc(x.n).status;
-    if(topicFilter==='node' && !x.node) return;
-    if(topicFilter==='todo' && st==='done') return;
-    if(topicFilter==='done' && st!=='done') return;
-    if(topicSearch && !x.title.toLowerCase().includes(topicSearch.toLowerCase())) return;
-    planHtml += `<div class="list-item">
-      <div class="row"><span class="pill ${st==='done'?'':st==='draft'?'warm':'gray'}">${st==='done'?'已发':st==='draft'?'写着':'待写'}</span>
-      <div class="li-title">${esc(sc(x.n).title||x.title)}</div></div>
-      <div class="li-meta">Day ${x.day} ${x.node?'· <span class="pill node">节点</span>':''} · ${esc(D.howByType[x.type])}</div>
-      <div class="li-acts">
-        <button class="btn sm" data-cycle="${x.n}">${st==='todo'?'写这篇':st==='draft'?'标已发':'再写一次'}</button>
-        <button class="btn sm" data-write="${esc(x.title)}">用这个标题写</button>
-        <button class="btn sm" data-copy="${esc(x.title)}">复制</button>
-      </div></div>`;
-  });
-  let libHtml='';
-  D.topics.forEach((g,gi)=>{
-    const items=g.items.filter(t=>!topicSearch || t.toLowerCase().includes(topicSearch.toLowerCase()));
-    if(!items.length) return;
-    libHtml += `<div class="grp-title">${esc(g.cat)}</div>`;
-    items.forEach((t,i)=>{
-      const k=topicKey(gi,i), s=S.topics[k]||'';
-      if(topicFilter==='used' && s!=='used') return;
-      if(topicFilter==='want' && s!=='want') return;
-      libHtml += `<div class="list-item"><div class="li-title">${esc(t)}${s==='used'?' <span class="pill">已用</span>':s==='want'?' <span class="pill warm">想写</span>':''}</div>
-        <div class="li-acts"><button class="btn sm" data-mark="${esc(k)}" data-v="want">想写</button><button class="btn sm" data-mark="${esc(k)}" data-v="used">已用</button><button class="btn sm" data-write="${esc(t)}">写这篇 →</button><button class="btn sm" data-copy="${esc(t)}">复制</button></div></div>`;
-    });
-  });
-  if(S.customTopics.length){
-    libHtml += '<div class="grp-title">我自己加的</div>';
-    S.customTopics.forEach((t,i)=>{ libHtml += `<div class="list-item"><div class="li-title">${esc(t)}</div><div class="li-acts"><button class="btn sm" data-write="${esc(t)}">写这篇 →</button><button class="btn sm" data-copy="${esc(t)}">复制</button><button class="btn sm danger" data-del="${i}">删</button></div></div>`; });
-  }
-  let docHtml='';
-  DOCS.forEach((d,i)=>{
-    docHtml += `<div class="doc" data-doc="${i}"><div class="doc-h"><span class="chev">▶</span><div class="t">${esc(d.title)}</div><button class="btn sm" data-dload="${i}">载入</button></div>
-      <div class="doc-b"><pre>${esc(d.text)}</pre><div class="row" style="margin-top:10px"><button class="btn sm" data-dlbody="${i}">载入到正文</button><button class="btn sm" data-dcopy="${i}">复制</button></div></div></div>`;
-  });
+  const list = S.topics.map((t,i)=>`<div class="list-item">
+    <div class="row"><div class="li-title">${t.done?'<span class="pill gray">已写</span> ':''}${esc(t.text)}</div></div>
+    <div class="li-acts">
+      <button class="btn sm" data-write="${i}">写这篇 →</button>
+      <button class="btn sm" data-done="${i}">${t.done?'标待写':'标已写'}</button>
+      <button class="btn sm" data-del="${i}">删</button>
+    </div></div>`).join('');
   $('#s-topics').innerHTML = `
   <div class="card">
     <h2>选题</h2>
-    <p class="hint">30 篇排期 + 48 条选题。想写哪篇就点「写这篇」，标题会自动带进写作区。</p>
-    <div class="secbar"><input type="text" id="topicSearch" placeholder="搜选题…" value="${esc(topicSearch)}" class="grow">
-      <button class="btn sm ${topicFilter==='all'?'on':''}" data-tf="all">全部</button>
-      <button class="btn sm ${topicFilter==='node'?'on':''}" data-tf="node">节点</button>
-      <button class="btn sm ${topicFilter==='todo'?'on':''}" data-tf="todo">待写</button>
-      <button class="btn sm ${topicFilter==='want'?'on':''}" data-tf="want">想写</button>
-      <button class="btn sm ${topicFilter==='done'?'on':''}" data-tf="done">已发</button></div>
-    <div class="row" style="margin-bottom:14px"><input type="text" id="newTopic" placeholder="想到一条就记下来…" class="grow"><button class="btn pri" id="addTopic">加进选题</button></div>
-    <div class="grp-title">30 篇排期</div>${planHtml||'<div class="note">没有匹配的排期</div>'}
-    <div class="grp-title">选题库</div>${libHtml||'<div class="note">没有匹配的选题</div>'}
-  </div>
-  <div class="card"><h2>参考文案</h2><p class="hint">点标题展开，可一键载入写作区。文案均为原创，双下划线占位符记得换成真实记录。</p>${docHtml}</div>`;
-
-  const pos=$('#topicSearch').selectionStart;
-  $('#topicSearch').oninput = e => { topicSearch=e.target.value; rTopics(); const el=$('#topicSearch'); el.focus(); el.setSelectionRange(pos,pos); };
-  $('#addTopic').onclick = () => { const v=$('#newTopic').value.trim(); if(!v)return; S.customTopics.push(v); save(); rTopics(); toast('已加进选题'); };
+    <p class="hint">想到什么就记下来，点「写这篇」标题会自动带进写作区。没有预设内容，全是你自己写的。</p>
+    <div class="row"><input type="text" id="newTopic" placeholder="记一个选题…" class="grow"><button class="btn pri" id="addTopic">加进选题</button></div>
+    <div style="margin-top:16px">${list || '<div class="note">还没有选题。上面加一条试试。</div>'}</div>
+  </div>`;
+  $('#addTopic').onclick = () => { const v=$('#newTopic').value.trim(); if(!v)return; S.topics.push({text:v,done:false}); save(); rTopics(); toast('已加进选题'); };
   $('#newTopic').onkeydown = e => { if(e.key==='Enter') $('#addTopic').click(); };
   $('#s-topics').onclick = e => {
-    const tf=e.target.closest('[data-tf]'); if(tf){ topicFilter=tf.dataset.tf; rTopics(); return; }
-    const cy=e.target.closest('[data-cycle]'); if(cy){ const x=sc(cy.dataset.cycle); x.status=x.status==='todo'?'draft':x.status==='draft'?'done':'todo'; save(); rTopics(); return; }
-    const mk=e.target.closest('[data-mark]'); if(mk){ S.topics[mk.dataset.mark]=mk.dataset.v; save(); rTopics(); return; }
-    const dl=e.target.closest('[data-del]'); if(dl){ S.customTopics.splice(+dl.dataset.del,1); save(); rTopics(); return; }
-    const cp=e.target.closest('[data-copy]'); if(cp){ copy(cp.dataset.copy,'选题'); return; }
-    const wr=e.target.closest('[data-write]'); if(wr){ S.editor.title=wr.dataset.write; S.editor.ref=''; save(); go('write'); return; }
-    const dh=e.target.closest('.doc-h'); if(dh && !e.target.closest('button')){ dh.parentElement.classList.toggle('open'); return; }
-    const dc=e.target.closest('[data-dcopy]'); if(dc){ copy(DOCS[+dc.dataset.dcopy].text,'文案'); return; }
-    const db=e.target.closest('[data-dlbody]'); if(db){ S.editor.body=DOCS[+db.dataset.dlbody].text; save(); go('write'); toast('已载入正文'); return; }
-    const dm=e.target.closest('[data-dload]'); if(dm){ const d=DOCS[+dm.dataset.dload]; S.editor.title=d.title; S.editor.body=d.text; save(); go('write'); toast('已载入标题与正文'); return; }
+    const w=e.target.closest('[data-write]'); if(w){ S.editor.ref=S.topics[+w.dataset.write].text; S.editor.title=S.topics[+w.dataset.write].text; save(); go('write'); return; }
+    const d=e.target.closest('[data-done]'); if(d){ S.topics[+d.dataset.done].done=!S.topics[+d.dataset.done].done; save(); rTopics(); return; }
+    const x=e.target.closest('[data-del]'); if(x){ S.topics.splice(+x.dataset.del,1); save(); rTopics(); return; }
   };
 }
 
 /* ---------- 写作区：标题 / 初稿 / 正文 ---------- */
 const RULES=[
-  {re:/(不反弹|根治多囊|改善多囊|降胰岛素|控糖|易瘦体质|躺瘦|不用运动也能瘦)/g,lv:'bad',why:'功效 / 疗效承诺，账号带 PCOS 标签更敏感'},
+  {re:/(不反弹|根治多囊|改善多囊|降胰岛素|控糖|易瘦体质|躺瘦|不用运动也能瘦)/g,lv:'bad',why:'功效 / 疗效承诺'},
   {re:/([0-9一二三四五六七八九十]+\s*个月[^。\n]{0,6}(瘦回|减到|瘦到)\s*[0-9]+\s*斤)|(一个?月轻\s*[0-9.]+\s*(公斤|斤))|(体重一周记|[0-9]+\s*天瘦回)/g,lv:'bad',why:'结果 / 期限 / 称重承诺'},
-  {re:/(瘦\s*[0-9]+\s*(斤|公斤|kg))|([0-9]+\s*天瘦[0-9]+\s*斤)/g,lv:'bad',why:'掉秤承诺（讲过去的真实经历可保留，讲未来的承诺要删）'},
   {re:/(《中国[^》]*指南|膳食指南|营养师(建议|说)|医生建议|遵医嘱)/g,lv:'bad',why:'专业背书，未核实出处或涉资质风险'},
   {re:/(微信|加我|私我|加V|vx|vx号|扫码|二维码|https?:\/\/|www\.|github\.io|小程序搜|站外)/g,lv:'bad',why:'站外导流，笔记 / 评论里属高风险'},
   {re:/(代餐|减肥药|酵素|减肥茶|疗效|体脂秤|食物秤|卡路里\s*App)/g,lv:'bad',why:'违禁品类或黑名单商单'},
-  {re:/(进得比出得少|热量缺口|基础代谢|胰岛素)/g,lv:'mid',why:'机制表述：公开内容里淡化原理，只讲日子不讲道理'},
-  {re:/(这样能瘦|适合多囊|大家都应该|你应该|建议你们)/g,lv:'mid',why:'口径统一用「我自己的做法」，不给他人方案'},
-  {re:/__/g,lv:'mid',why:'占位符未替换：换成真实记录，没有就写「记了一阵子」，别编数字'},
-  {re:/[0-9]+\s*(斤|公斤|kg)/g,lv:'mid',why:'出现体重数字：确认是真实经历而非效果承诺'}
+  {re:/(进得比出得少|热量缺口|基础代谢|胰岛素)/g,lv:'mid',why:'机制表述：只讲自己做的事，不解释原理'},
+  {re:/(这样能瘦|适合多囊|大家都应该|你应该|建议你们)/g,lv:'mid',why:'统一用「我自己的做法」，不给他人方案'},
+  {re:/__/g,lv:'mid',why:'占位符未替换：换成真实记录，别编数字'},
+  {re:/[0-9]+\s*(斤|公斤|kg)/g,lv:'mid',why:'出现身体数字：确认是真实经历而非效果承诺'}
 ];
 function scan(text){ const out=[]; RULES.forEach(r=>{ r.re.lastIndex=0; const m=text.match(r.re); if(m) out.push({lv:r.lv,why:r.why,hit:[...new Set(m)].slice(0,4).join(' / ')}); }); return out; }
 
 function rWrite(){
   const e=S.editor;
+  const opts = S.topics.length
+    ? `<option value="">不关联</option>`+S.topics.map((t,i)=>`<option value="${esc(t.text)}" ${e.ref===t.text?'selected':''}>${esc(t.text)}</option>`).join('')
+    : `<option value="">还没有选题</option>`;
   $('#s-write').innerHTML = `
   <div class="card">
     <h2>写作区</h2>
-    <p class="hint">三步走：先写标题定钩子，再写初稿倒素材，最后整理成正文。内容自动存在本机，关页面不丢。</p>
-    <div class="field"><label class="lbl">关联选题（可选）
-      <select id="wRef" style="width:auto;min-width:180px;padding:6px 10px;font-size:12px"><option value="">不关联</option>
-      ${D.schedule.map(x=>`<option value="${x.n}" ${String(e.ref)===String(x.n)?'selected':''}>Day ${x.day} · ${esc(x.title)}</option>`).join('')}</select></label></div>
+    <p class="hint">先写标题定钩子，再写初稿倒素材，最后整理成正文。内容自动存在本机，关页面不丢。</p>
+    <div class="field"><label class="lbl">关联选题
+      <select id="wRef" style="width:auto;min-width:180px;padding:6px 10px;font-size:12px">${opts}</select></label></div>
 
     <div class="field">
       <label class="lbl">① 标题 <span class="pill">决定被不被点开</span></label>
-      <input type="text" id="wTitle" value="${esc(e.title)}" placeholder="从选题库挑一个，或自己写">
+      <input type="text" id="wTitle" value="${esc(e.title)}" placeholder="写标题">
       <div class="counter" id="cTitle"></div>
-      <div class="tag-cloud" id="titleHooks">${D.hooks.map((h,i)=>`<span class="tag" data-hook="${i}" title="${esc(h.k)}">${esc(h.t.slice(0,16))}…</span>`).join('')}</div>
-      <div class="mini" style="margin-top:6px">点钩子可插入到标题末尾；标题建议 20 字内</div>
     </div>
 
     <div class="field">
-      <label class="lbl">② 初稿 <span class="pill warm">随便写 · 不用通顺</span></label>
-      <textarea id="wDraft" rows="9" placeholder="先把想说的都倒出来：真实细节、数字、情绪、说不出口的话。这里不用管排版和通顺。">${esc(e.draft)}</textarea>
+      <label class="lbl">② 初稿 <span class="pill gray">随便写 · 不用通顺</span></label>
+      <textarea id="wDraft" rows="10" placeholder="先把想说的都倒出来：真实细节、数字、情绪、说不出口的话。这里不用管排版和通顺。">${esc(e.draft)}</textarea>
       <div class="counter" id="cDraft"></div>
     </div>
 
     <div class="field">
       <label class="lbl">③ 正文 <span class="pill">可发布版</span></label>
-      <textarea id="wBody" rows="16" placeholder="把初稿整理成能直接发的内容：钩子前置、短句、Emoji 分区、结尾轻互动。">${esc(e.body)}</textarea>
+      <textarea id="wBody" rows="16" placeholder="把初稿整理成能直接发的内容。">${esc(e.body)}</textarea>
       <div class="counter" id="cBody"></div>
     </div>
 
@@ -640,45 +196,25 @@ function rWrite(){
       <button class="btn pri" id="wScan">发布前体检</button>
       <button class="btn" id="wCopyBody">复制正文</button>
       <button class="btn" id="wCopyAll">复制标题 + 正文</button>
-      <button class="btn" id="wCopyTags">复制全文含标签</button>
       <button class="btn" id="wToDraft">正文→初稿备份</button>
-      <button class="btn danger" id="wClear">清空</button>
+      <button class="btn danger" id="wClear">清空三段</button>
     </div>
     <div id="scanOut"></div>
   </div>
 
-  <div class="card">
-    <h2>快捷插入（到正文末尾）</h2>
-    <h3>白话翻译层</h3><div class="row">${D.translate.map((t,i)=>`<button class="btn sm" data-ins="t${i}">翻译 ${i+1}</button>`).join('')}</div>
-    <h3>金句</h3><div class="row">${D.quotes.map((t,i)=>`<button class="btn sm" data-ins="q${i}">${esc(t.slice(0,10))}…</button>`).join('')}</div>
-    <h3>话题标签</h3><div class="tag-cloud">${D.tags.map(t=>`<span class="tag" data-ins="tag" data-v="${esc(t)}">${esc(t)}</span>`).join('')}</div>
-    <div class="row" style="margin-top:10px"><button class="btn sm" data-ins="alltags">全部标签</button><button class="btn sm" data-ins="cta">「一起勾」结尾</button></div>
-  </div>
-
   <div class="card warm">
-    <h2>标题数字：能用与不能用</h2>
-    <div class="row" style="align-items:flex-start;gap:24px">
-      <div class="grow"><div class="mini" style="color:var(--green-d);margin-bottom:6px">✅ 可以用（讲过程 / 真实经历）</div>${D.numbersOk.map(t=>`<div class="li-meta" style="font-size:13px">· ${esc(t)}</div>`).join('')}</div>
-      <div class="grow"><div class="mini" style="color:var(--rose);margin-bottom:6px">🚫 不要用（承诺结果）</div>${D.numbersNo.map(t=>`<div class="li-meta" style="font-size:13px">· ${esc(t)}</div>`).join('')}</div>
-    </div>
-  </div>
-
-  <div class="card">
     <h2>备份</h2>
-    <p class="hint">数据只在这台设备的浏览器里。换设备或清缓存前先导出。</p>
+    <p class="hint">数据只在这台设备的浏览器里。换设备或清缓存前先导出；新设备导入即可恢复。</p>
     <div class="row"><button class="btn" id="expBtn">导出备份</button><button class="btn" id="impBtn">导入备份</button><input type="file" id="impFile" accept="application/json,.json" style="display:none"></div>
     <div class="divider"></div>
     <button class="btn danger" id="wipeBtn">清空全部数据</button>
     <div class="note" style="margin-bottom:0">发布前请人工过一遍图文与标签；平台规则以小红书后台实时显示为准。</div>
   </div>`;
 
-  const count = (t) => (t||'').replace(/\s/g,'').length;
+  const count = t => (t||'').replace(/\s/g,'').length;
   const upd = () => {
-    S.editor.title=$('#wTitle').value;
-    S.editor.draft=$('#wDraft').value;
-    S.editor.body=$('#wBody').value;
-    S.editor.ref=$('#wRef').value;
-    save();
+    S.editor.title=$('#wTitle').value; S.editor.draft=$('#wDraft').value;
+    S.editor.body=$('#wBody').value; S.editor.ref=$('#wRef').value; save();
     const ph=(S.editor.body.match(/__/g)||[]).length;
     $('#cTitle').textContent=`${count(S.editor.title)} 字${count(S.editor.title)>20?'（建议 20 字内）':''}`;
     $('#cDraft').textContent=`${count(S.editor.draft)} 字`;
@@ -687,38 +223,25 @@ function rWrite(){
   ['wTitle','wDraft','wBody','wRef'].forEach(id=>{ $('#'+id).addEventListener('input',upd); $('#'+id).addEventListener('change',upd); });
   upd();
 
-  $('#wRef').onchange = () => { const n=$('#wRef').value; if(n && !$('#wTitle').value){ const x=D.schedule.find(v=>String(v.n)===String(n)); if(x) $('#wTitle').value=x.title; } upd(); };
+  $('#wRef').onchange = () => { const v=$('#wRef').value; if(v && !$('#wTitle').value) $('#wTitle').value=v; upd(); };
   $('#wScan').onclick = () => {
     const res=scan($('#wTitle').value+'\n'+$('#wBody').value);
     const bad=res.filter(r=>r.lv==='bad'), mid=res.filter(r=>r.lv==='mid');
     $('#scanOut').innerHTML=`<div style="margin-top:14px">
       ${bad.length?`<div class="note warn">${bad.length} 处建议改掉</div>`+bad.map(r=>`<div class="scan-line bad"><b>建议改</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
-      ${mid.length?`<div class="note">${mid.length} 处看一眼，确认是不是有意的</div>`+mid.map(r=>`<div class="scan-line mid"><b>看一眼</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
+      ${mid.length?`<div class="note">${mid.length} 处看一眼</div>`+mid.map(r=>`<div class="scan-line mid"><b>看一眼</b> · ${esc(r.why)}<br><span class="mini">命中：${esc(r.hit)}</span></div>`).join(''):''}
       ${!bad.length?`<div class="scan-line good">✅ 没发现掉秤承诺、功效宣称、专业背书或站外导流。${!mid.length?'全文干净。':''}</div>`:''}
     </div>`;
   };
   $('#wCopyBody').onclick = ()=>copy($('#wBody').value,'正文');
   $('#wCopyAll').onclick = ()=>copy(($('#wTitle').value?$('#wTitle').value+'\n\n':'')+$('#wBody').value,'标题+正文');
-  $('#wCopyTags').onclick = ()=>copy(($('#wTitle').value?$('#wTitle').value+'\n\n':'')+$('#wBody').value+'\n\n'+D.tags.join(' '),'全文含标签');
-  $('#wToDraft').onclick = ()=>{ const b=$('#wBody').value; $('#wDraft').value = ($('#wDraft').value?$('#wDraft').value+'\n\n—— 正文备份 ——\n\n':'')+b; upd(); toast('正文已备份到初稿'); };
-  $('#wClear').onclick = ()=>{ if(!confirm('清空标题、初稿、正文？备份和选题不受影响。'))return; $('#wTitle').value='';$('#wDraft').value='';$('#wBody').value='';upd();$('#scanOut').innerHTML=''; };
+  $('#wToDraft').onclick = ()=>{ $('#wDraft').value = ($('#wDraft').value?$('#wDraft').value+'\n\n—— 正文备份 ——\n\n':'')+$('#wBody').value; upd(); toast('正文已备份到初稿'); };
+  $('#wClear').onclick = ()=>{ if(!confirm('清空标题、初稿、正文？选题不受影响。'))return; $('#wTitle').value='';$('#wDraft').value='';$('#wBody').value='';upd();$('#scanOut').innerHTML=''; };
 
-  $('#s-write').onclick = e => {
-    const h=e.target.closest('[data-hook]'); if(h){ const t=D.hooks[+h.dataset.hook].t; $('#wTitle').value=($('#wTitle').value?$('#wTitle').value+' ':'')+t; upd(); return; }
-    const b=e.target.closest('[data-ins]'); if(!b)return;
-    const k=b.dataset.ins; let v='';
-    if(k.startsWith('t')) v=D.translate[+k.slice(1)];
-    else if(k.startsWith('q')) v='「'+D.quotes[+k.slice(1)]+'」';
-    else if(k==='tag') v=b.dataset.v;
-    else if(k==='alltags') v='\n\n'+D.tags.join(' ');
-    else if(k==='cta') v='\n\n要不要一起？每天勾几格就行，只做一件也算数 👇';
-    const ta=$('#wBody'); ta.value=(ta.value?ta.value+'\n\n':'')+v; upd(); toast('已插入到正文');
-  };
-
-  $('#expBtn').onclick = ()=>{ const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='缝隙写作台备份_'+new Date().toLocaleDateString('sv-SE')+'.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('备份已导出'); };
+  $('#expBtn').onclick = ()=>{ const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='写作台备份_'+new Date().toLocaleDateString('sv-SE')+'.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('备份已导出'); };
   $('#impBtn').onclick = ()=>$('#impFile').click();
-  $('#impFile').onchange = e => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.editor=Object.assign({ref:'',title:'',draft:'',body:''},p.editor||{}); save(); toast('导入成功'); go('topics'); }catch(err){ toast('文件格式不对，没导入'); } }; r.readAsText(f); };
-  $('#wipeBtn').onclick = ()=>{ if(!confirm('清空全部数据？建议先导出备份。'))return; if(!confirm('再确认一次：所有选题状态、标题、初稿、正文都会没了。'))return; S=DEFAULT(); save(); go('topics'); toast('已清空'); };
+  $('#impFile').onchange = e => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.editor=Object.assign({ref:'',title:'',draft:'',body:''},p.editor||{}); S.topics=p.topics||[]; save(); toast('导入成功'); go('topics'); }catch(err){ toast('文件格式不对，没导入'); } }; r.readAsText(f); };
+  $('#wipeBtn').onclick = ()=>{ if(!confirm('清空全部数据？建议先导出备份。'))return; if(!confirm('再确认一次：所有选题和三段文字都会没了。'))return; S=DEFAULT(); save(); go('topics'); toast('已清空'); };
 }
 
 rTopics();
