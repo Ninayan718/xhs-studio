@@ -96,13 +96,14 @@ label.lbl .pill{margin-left:auto}
 
 <script>
 "use strict";
+const PROMPT_DEFAULT="你现在是一位小红书图文文案写手。请严格按下面的规则，为「小言」写一篇可以直接发布的图文笔记。\n\n═══════════════════════════\n一、账号固定信息（不要改，也不要在文案里复述这些说明）\n═══════════════════════════\n主账号：小言的爱与成长\n定位一句话：三分钟热度也没关系，多来几个三分钟\n人设：一个反复失败、但每次都能重新开始的普通妈妈。不自律、会刷短剧到凌晨、会情绪性饮食、会半途而废——这些都是内容资产，不要藏。\n调性：诚实、脆弱、自嘲、平视读者。不喊加油、不卖惨、不端着、不说教。\n读者：和自己较劲、总觉得\"我不行\"的普通人。她们要的不是方法，是被理解。\n\n═══════════════════════════\n二、核心写作方法：四步迁移（这是灵魂，必须四步齐全）\n═══════════════════════════\n① 局限当招牌：把这次主题里\"见不得人\"的那部分，直接放在最显眼处——标题和前三行。数字优先（如\"13 样没坚持下来\"\"刷了 6 小时短剧\"\"115 斤\"）。不要铺垫，不要先讲场景再慢慢引出。\n② 替同类站队：公开指出主流标准是给哪种人准备的，替剩下的人说话。句式参考方向（不要照抄）：\"这套 XX 标准，本来就不是给 XX 的人定的。\"把矛头指向标准本身，而不是自责。\n③ 只给同类能用：明确说\"我不教你变 XX，我只给你一个我能用的活法\"。给的是同龄人的真实经验，不是万能公式、不是教程、不是\"你应该\"。如果是工具/记录类素材，重点写它怎么帮我省事、哪部分已经吃灰或没用起来，不吹神效。\n④ 门槛降到零：结尾给一个今天就能做的具体动作，要小到不可能失败（如\"先做三分钟\"\"只改一个小动作\"）。并用一个动作回环开头的意象（如开头写\"落灰的钢琴\"，结尾写\"先弹三分钟\"）。\n\n═══════════════════════════\n三、结构要求（对应写作台的标题/初稿/正文）\n═══════════════════════════\n【标题】\n- 20 字以内，含局限或数字钩子\n- 可以用数字，但只能是：过程数字（3 个不 / 6 件 / 100 天 / 1 分钟）或已发生的真实经历数字（121→105→115）\n- 禁止：承诺结果的数字（一个月瘦 X 斤 / X 天瘦 X 公斤 / 瘦回 105 斤当承诺）\n\n【正文】\n- 约 500-800 字（以把话说透、不灌水为准），短句为主，一段不超过 3 行，大量留白\n- 前 3 行必须完成①局限当招牌，能独立当封面文案\n- Emoji 只用于分区，不做装饰\n- 结尾轻互动，用一个具体问题邀请同类认领（如\"你学到一半放弃的是什么？\"），不写\"点赞关注\"\n- 不要解释机制原理，只讲自己做了什么、发生了什么\n\n═══════════════════════════\n四、合规红线（违反任何一条就重写）\n═══════════════════════════\n- 不承诺掉秤数字 / 周期 / 效果；不写\"不反弹\"\"一个月轻 1~2 公斤\"\"X 天瘦 X 斤\"\n- 不写\"控糖\"\"降胰岛素\"\"改善多囊\"\"进得比出得少\"等功效或机制表述\n- 不冒充医生 / 营养师，不解读报告，不给他人方案；统一用\"我自己的做法\"\n- 不出现微信 / 加我 / 私我 / 二维码 / 任何外部链接\n- 不卖代餐、减肥药、酵素、疗效保健品；不推荐体脂秤 / 卡路里 App\n- 所有数字必须来自用户给的素材。素材里没有的，写\"记了一阵子\"，绝对不要编\n- 不写他人的具体隐私事件、冲突细节或负面评价，涉及家人时只保留对\"我自己的感受和变化\"的描述\n- 平台规则以小红书后台实时显示为准\n\n═══════════════════════════\n五、语言细节\n═══════════════════════════\n- 口语、短句、陈述句为主；少用形容词，多用具体名词和动词\n- 不写\"加油\"\"你一定可以\"\"一起变好\"这类鼓励腔\n- 不写\"大家好\"\"今天想跟大家聊聊\"这类开场白\n- 用户说过的原话优先保留，不要改成更\"高级\"的表达\n- 克制使用感叹号，不靠感叹号制造廉价情绪，让句子自己说话\n\n═══════════════════════════\n六、输出格式（严格按这个格式交付）\n═══════════════════════════\n1. 标题候选 3 条（每条后面用括号标注钩子类型）\n2. 封面文字 1 条（大字 + 小字角标）\n3. 正文全文（代码块包裹，可直接复制）\n4. 话题标签 6–8 个（功能词为主 + 自有标签）\n5. 四步自检表：逐条说明①②③④分别落在哪一句（引用原句）\n6. 金句 / 转折点各标注 1 处\n\n最后附一句：以上文案为原创，仅借鉴结构方法论，未复制任何对标账号原句；请人工过一遍合规与版权。\n\n═══════════════════════════\n七、本次任务（每次替换这里）\n═══════════════════════════\n主题：【主题】\n\n真实素材（可直接贴日记片段、随笔草稿或工具使用记录，保留原话、不删减细节）：\n【真实素材】\n\n开始写。";
 const KEY='xhs-writing-desk-v4';
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const nowId = () => 'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const count = t => (t||'').replace(/\s/g,'').length;
 
-const DEFAULT = () => ({ topics:[], articles:[], activeId:'' });
+const DEFAULT = () => ({ topics:[], articles:[], activeId:'', prompt:PROMPT_DEFAULT });
 let S = DEFAULT();
 
 /* 迁移：把 v3 的单篇 editor 变成第一篇文章；清掉更早的键 */
@@ -113,7 +114,7 @@ try{
     S=Object.assign(DEFAULT(),p);
     S.topics=p.topics||[];
     S.articles=p.articles||[];
-    S.activeId=p.activeId||'';
+    S.activeId=p.activeId||''; S.prompt=p.prompt||PROMPT_DEFAULT;
   }else{
     const old=localStorage.getItem('xhs-writing-desk-v3');
     if(old){
@@ -121,7 +122,7 @@ try{
       S.topics=p.topics||[];
       if(p.editor && (p.editor.title||p.editor.draft||p.editor.body)){
         S.articles=[{id:nowId(),title:p.editor.title||'',draft:p.editor.draft||'',body:p.editor.body||'',status:'draft',createdAt:Date.now(),updatedAt:Date.now(),topic:p.editor.ref||''}];
-        S.activeId=S.articles[0].id;
+        S.activeId=S.articles[0].id; S.prompt=PROMPT_DEFAULT;
       }
     }
   }
@@ -263,6 +264,18 @@ function rWrite(){
     <div id="scanOut"></div>
   </div>`:`<div class="card"><div class="note">还没有正在编辑的文章。点上面「新建文章」开始。</div></div>`}
 
+  <div class="card">
+    <h2>生成正文的 Prompt</h2>
+    <p class="hint">流程：在②初稿里写真实素材 → 点「填入初稿并复制」→ 发给 AI → 把返回的正文粘回③。模板可以改，改完自动保存。</p>
+    <textarea id="promptBox" rows="8" style="font-size:12.5px;line-height:1.7">${esc(S.prompt||PROMPT_DEFAULT)}</textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn pri" id="promptFill">填入初稿并复制 →</button>
+      <button class="btn" id="promptCopy">复制模板原文</button>
+      <button class="btn" id="promptReset">恢复默认模板</button>
+    </div>
+    <div class="note" style="margin-bottom:0">填入的是当前文章的标题与初稿。初稿为空会先用标题，主题可再改。模板改动只影响本机这台浏览器。</div>
+  </div>
+
   <div class="card warm">
     <h2>备份</h2>
     <p class="hint">所有文章和选题只存在这台设备的浏览器里。换设备或清缓存前先导出；新设备导入即可恢复。</p>
@@ -273,6 +286,21 @@ function rWrite(){
   </div>`;
 
   renderArticleList();
+
+  /* Prompt 模板：事件必须在 if(!a)return 之前，空文章时也能复制模板 */
+  const pb=$('#promptBox');
+  pb.addEventListener('input',()=>{ S.prompt=pb.value; save(); });
+  $('#promptCopy').onclick=()=>copy(pb.value,'Prompt 模板');
+  $('#promptReset').onclick=()=>{ if(!confirm('恢复默认 Prompt？你改过的模板会被覆盖。'))return; S.prompt=PROMPT_DEFAULT; save(); rWrite(); toast('已恢复默认模板'); };
+  $('#promptFill').onclick=()=>{
+    const art=current();
+    const tpl=pb.value;
+    let topic=art&&art.title?art.title:'', material=art&&art.draft?art.draft:'';
+    if(!topic && !material){ toast('先写标题或初稿，再点这个按钮'); return; }
+    const out=tpl.replace('【主题】',topic||'（未填，请自己补）').replace('【真实素材】',material||'（初稿为空，请把真实素材贴到这里）');
+    copy(out,'已填入初稿的 Prompt');
+  };
+
   if(!a) return;
 
   const upd=()=>{
@@ -306,6 +334,7 @@ function rWrite(){
 }
 
 /* 发布前体检规则 */
+
 const RULES=[
   {re:/(不反弹|根治多囊|改善多囊|降胰岛素|控糖|易瘦体质|躺瘦|不用运动也能瘦)/g,lv:'bad',why:'功效 / 疗效承诺'},
   {re:/([0-9一二三四五六七八九十]+\s*个月[^。\n]{0,6}(瘦回|减到|瘦到)\s*[0-9]+\s*斤)|(一个?月轻\s*[0-9.]+\s*(公斤|斤))|(体重一周记|[0-9]+\s*天瘦回)/g,lv:'bad',why:'结果 / 期限 / 称重承诺'},
@@ -329,7 +358,7 @@ $('#s-write').addEventListener('click',e=>{
 $('#s-write').addEventListener('change',e=>{
   if(e.target.id==='impFile'){
     const f=e.target.files[0]; if(!f)return; const r=new FileReader();
-    r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.topics=p.topics||[]; S.articles=p.articles||[]; S.activeId=p.activeId||''; if(S.articles.length&&!S.articles.some(a=>a.id===S.activeId))S.activeId=S.articles[0].id; save(); toast('导入成功，共 '+S.articles.length+' 篇'); go('write'); }catch(err){ toast('文件格式不对，没导入'); } };
+    r.onload=()=>{ try{ const p=JSON.parse(r.result); S=Object.assign(DEFAULT(),p); S.topics=p.topics||[]; S.articles=p.articles||[]; S.activeId=p.activeId||''; S.prompt=p.prompt||PROMPT_DEFAULT; if(S.articles.length&&!S.articles.some(a=>a.id===S.activeId))S.activeId=S.articles[0].id; save(); toast('导入成功，共 '+S.articles.length+' 篇'); go('write'); }catch(err){ toast('文件格式不对，没导入'); } };
     r.readAsText(f);
   }
 });
